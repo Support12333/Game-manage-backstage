@@ -46,33 +46,33 @@ export const constantRoutes = [
   {
     path: '/',
     component: Layout,
-    redirect: '/dashboard',
+    redirect: '/home',
     children: [{
-      path: 'dashboard',
-      name: 'Dashboard',
-      component: () => import('@/views/dashboard/index'),
-      meta: { title: 'Dashboard', icon: 'dashboard' }
+      path: 'home',
+      name: '数据概况',
+      component: () => import('@/views/home/index'),
+      meta: { title: '数据概况', icon: 'el-icon-s-home' }
     }]
   },
 
   {
-    path: '/example',
+    path: '/user',
     component: Layout,
-    redirect: '/example/table',
-    name: 'Example',
-    meta: { title: 'Example', icon: 'el-icon-s-help' },
+    redirect: '/user/table',
+    name: '用户分析',
+    meta: { title: '用户分析', icon: 'el-icon-user-solid' },
     children: [
       {
-        path: 'table',
-        name: 'Table',
-        component: () => import('@/views/table/index'),
-        meta: { title: 'Table', icon: 'table' }
+        path: 'add_user',
+        name: '新增用户',
+        component: () => import('@/views/add_user/index'),
+        meta: { title: '新增用户', icon: 'add_user' }
       },
       {
-        path: 'tree',
-        name: 'Tree',
-        component: () => import('@/views/tree/index'),
-        meta: { title: 'Tree', icon: 'tree' }
+        path: 'user_manage',
+        name: '用户管理',
+        component: () => import('@/views/user_manage/index'),
+        meta: { title: '用户管理', icon: 'user_manage' }
       }
     ]
   },
