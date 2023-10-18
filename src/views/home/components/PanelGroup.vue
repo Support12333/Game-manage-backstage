@@ -29,28 +29,38 @@ export default {
       datalist: [{
         title: "活跃在线用户数",
         totality: '418000',
+        today_text:'今日',
         today: '9577',
+        yesterday_text:'昨日',
         yesterday: '10056'
       },
       {
         title: "活跃在线用户数",
         totality: '418000',
+        today_text:'今日',
         today: '9577',
+        yesterday_text:'昨日',
         yesterday: '10056'
       }, {
         title: "活跃在线用户数",
         totality: '418000',
+        today_text:'今日',
         today: '9577',
+        yesterday_text:'昨日',
         yesterday: '10056'
       }, {
         title: "活跃在线用户数",
         totality: '418000',
+        today_text:'今日',
         today: '9577',
+        yesterday_text:'昨日',
         yesterday: '10056'
       }, {
         title: "活跃在线用户数",
         totality: '418000',
+        today_text:'今日',
         today: '9577',
+        yesterday_text:'昨日',
         yesterday: '10056'
       }],
       colors: ['#bc8ef7', '#f18f99', '#8098f2', '#c3c34a', '#448787']
