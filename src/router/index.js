@@ -63,99 +63,95 @@ export const constantRoutes = [
     meta: { title: '用户分析', icon: 'el-icon-user-solid' },
     children: [
       {
-        path: 'add_user',
+        path: 'add-user',
         name: '新增用户',
-        component: () => import('@/views/add_user/index'),
-        meta: { title: '新增用户', icon: 'add_user' }
+        component: () => import('@/views/user/add-user'),
+        meta: { title: '新增用户'}
       },
       {
-        path: 'user_manage',
+        path: 'user-manage',
         name: '用户管理',
-        component: () => import('@/views/user_manage/index'),
-        meta: { title: '用户管理', icon: 'user_manage' }
+        component: () => import('@/views/user/user-manage'),
+        meta: { title: '用户管理' }
       }
     ]
   },
 
   {
-    path: '/form',
+    path: '/channel',
     component: Layout,
-    children: [
-      {
-        path: 'index',
-        name: 'Form',
-        component: () => import('@/views/form/index'),
-        meta: { title: 'Form', icon: 'form' }
-      }
-    ]
-  },
-
-  {
-    path: '/nested',
-    component: Layout,
-    redirect: '/nested/menu1',
-    name: 'Nested',
+    redirect: '/channel/menu1',
+    name: '渠道管理',
     meta: {
-      title: 'Nested',
-      icon: 'nested'
+      title: '渠道管理',
+      icon: 'el-icon-notebook-2'
     },
     children: [
       {
-        path: 'menu1',
-        component: () => import('@/views/nested/menu1/index'), // Parent router-view
-        name: 'Menu1',
-        meta: { title: 'Menu1' },
-        children: [
-          {
-            path: 'menu1-1',
-            component: () => import('@/views/nested/menu1/menu1-1'),
-            name: 'Menu1-1',
-            meta: { title: 'Menu1-1' }
-          },
-          {
-            path: 'menu1-2',
-            component: () => import('@/views/nested/menu1/menu1-2'),
-            name: 'Menu1-2',
-            meta: { title: 'Menu1-2' },
-            children: [
-              {
-                path: 'menu1-2-1',
-                component: () => import('@/views/nested/menu1/menu1-2/menu1-2-1'),
-                name: 'Menu1-2-1',
-                meta: { title: 'Menu1-2-1' }
-              },
-              {
-                path: 'menu1-2-2',
-                component: () => import('@/views/nested/menu1/menu1-2/menu1-2-2'),
-                name: 'Menu1-2-2',
-                meta: { title: 'Menu1-2-2' }
-              }
-            ]
-          },
-          {
-            path: 'menu1-3',
-            component: () => import('@/views/nested/menu1/menu1-3'),
-            name: 'Menu1-3',
-            meta: { title: 'Menu1-3' }
-          }
-        ]
+        path: 'analyze',
+        component: () => import('@/views/channel/analyze'), // Parent router-view
+        name: '渠道分析',
+        meta: { title: '渠道分析' }
       },
       {
-        path: 'menu2',
-        component: () => import('@/views/nested/menu2/index'),
-        name: 'Menu2',
-        meta: { title: 'menu2' }
+        path: 'detailed-data',
+        component: () => import('@/views/channel/detailed-data'),
+        name: '渠道详细数据',
+        meta: { title: '渠道详细数据' }
       }
     ]
   },
-
   {
-    path: 'external-link',
+    path: '/game_manage',
     component: Layout,
+    redirect: '/game_manage/form',
+    name: '游戏管理',
+    meta: { title: '游戏管理', icon: 'el-icon-bangzhu' },
     children: [
       {
-        path: 'https://panjiachen.github.io/vue-element-admin-site/#/',
-        meta: { title: 'External Link', icon: 'link' }
+        path: 'analysis',
+        component: () => import('@/views/game_manage/analysis/index'), // Parent router-view
+        name: '游戏分析',
+        meta: { title: '游戏分析' }
+      },
+      {
+        path: 'list',
+        component: () => import('@/views/game_manage/list/index'),
+        name: '游戏列表',
+        meta: { title: '游戏列表' }
+      },
+      {
+        path: 'advertising-list',
+        component: () => import('@/views/game_manage/advertising-list/index'),
+        name: '游戏广告列表',
+        meta: { title: '游戏广告列表' }
+      }
+    ]
+  },
+  {
+    path: '/advertisement',
+    component: Layout,
+    redirect: '/advertisement/form',
+    name: '广告管理',
+    meta: { title: '广告管理', icon: 'advertisement' },
+    children: [
+      {
+        path: 'game-advertising',
+        component: () => import('@/views/advertisement/game-advertising.vue'), // Parent router-view
+        name: '游戏广告分析',
+        meta: { title: '游戏广告分析' }
+      },
+      {
+        path: 'channel-advertising',
+        component: () => import('@/views/advertisement/advertising-list.vue'),
+        name: '渠道广告分析',
+        meta: { title: '渠道广告分析' }
+      },
+      {
+        path: 'advertising-list',
+        component: () => import('@/views/advertisement/advertising-list.vue'),
+        name: '广告列表',
+        meta: { title: '广告列表' }
       }
     ]
   },

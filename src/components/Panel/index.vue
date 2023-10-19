@@ -1,16 +1,16 @@
 
 <template>
-  <div class="content">
-    <div class="title">{{ item.title }}</div>
-    <div class="totality">{{ item.totality }}</div>
+  <div class="content" :style="{ background: colors }">
+    <div class="title">{{ title }}</div>
+    <div class="totality">{{ totality }}</div>
     <div class="card-time">
       <div class="card-left">
-        <div class="today_text">今日</div>
-        <div class="today">{{ item.today }}</div>
+        <div class="today_text">{{ today_text }}</div>
+        <div class="today">{{ today }}</div>
       </div>
       <div class="card-right">
-        <div class="yesterday_text">昨日</div>
-        <div class="yesterday">{{ item.yesterday }}</div>
+        <div class="yesterday_text">{{ yesterday_text }}</div>
+        <div class="yesterday">{{ yesterday }}</div>
       </div>
     </div>
   </div>
@@ -21,30 +21,31 @@ export default {
   props: {
     title: {
       type: String,
-      require: false,
-      default: () => { }
+      default: false
     },
     totality: {
       type: String,
-      require: false,
-      default: () => { }
+      default: false
     },
     today_text: {
       type: String,
-      require: false,
-      default: () => { }
-    }, today: {
+      default: false
+    },
+    today: {
       type: String,
-      require: false,
-      default: () => { }
-    }, yesterday_text: {
+      default: false
+    },
+    yesterday_text: {
       type: String,
-      require: false,
-      default: () => { }
-    }, yesterday: {
+      default: false
+    },
+    yesterday: {
       type: String,
-      require: false,
-      default: () => { }
+      default: false
+    },
+    colors: {
+      type: String,
+      default: false
     }
   }
 }
