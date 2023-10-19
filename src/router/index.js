@@ -63,9 +63,9 @@ export const constantRoutes = [
     meta: { title: '用户分析', icon: 'el-icon-user-solid' },
     children: [
       {
-        path: 'add-user',
+        path: 'add-data',
         name: '新增用户',
-        component: () => import('@/views/user/add-user'),
+        component: () => import('@/views/user/add-data'),
         meta: { title: '新增用户'}
       },
       {
