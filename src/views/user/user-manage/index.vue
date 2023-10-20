@@ -1,14 +1,12 @@
 <template>
-  <div class="container">
+  <div>
     <inquire />
-    <line-chart />
-    <user-table />
+  <user-table />
   </div>
 </template>
 
 <script>
 import Inquire from './components/Inquire.vue'
-import LineChart from './components/LineChart.vue'
 import UserTable from './components/UserTable.vue'
 export default {
   data() {
@@ -17,16 +15,10 @@ export default {
   },
   components: {
     Inquire,
-    LineChart,
     UserTable
   },
-
+  methods: {
+  }
 }
 </script>
-<style lang="scss" scoped>
-.title {
-  font-size: 18px;
-  color: #101010;
-  font-weight: bold;
-}
-</style>
+<style lang="scss" scoped></style>

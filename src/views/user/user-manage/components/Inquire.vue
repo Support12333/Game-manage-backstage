@@ -1,22 +1,19 @@
 <template>
   <div class="inquire">
-    <div class="title">新增用户分析</div>
-    <el-row>
+    <div class="title">用户管理</div>
+    <el-row  :gutter="20">
+      <el-col :xs="12" :sm="12" :lg="5">
+        <el-input v-model="input" placeholder="用户昵称/ID/邮箱/手机号"></el-input>
+      </el-col>
       <el-col :xs="12" :sm="12" :lg="3">
-        <el-select v-model="value" placeholder="全部渠道" @change="getChannelValue">
+        <el-select v-model="value" placeholder="属性" @change="getEditionValue">
           <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
           </el-option>
         </el-select>
       </el-col>
-      <el-col :xs="12" :sm="12" :lg="3">
-        <el-select v-model="value" placeholder="全部版本" @change="getEditionValue">
-          <el-option v-for="item in options2" :key="item.value" :label="item.label" :value="item.value">
-          </el-option>
-        </el-select>
-      </el-col>
-      <el-col :xs="12" :sm="12" :lg="14">
+      <el-col :xs="12" :sm="12" :lg="16">
         <div class="date-select">
-          <el-date-picker v-model="value" type="daterange" range-separator="至" start-placeholder="开始日期"
+          <el-date-picker v-model="date" type="daterange" range-separator="至" start-placeholder="开始日期"
             end-placeholder="结束日期" value-format="yyyy-MM-dd">
           </el-date-picker>
           <el-button type="primary" @click="inquire">查询</el-button>
@@ -31,25 +28,17 @@ export default {
     return {
       options: [{
         value: '1',
-        label: 'Google Play'
+        label: '未点广告'
       }, {
         value: '2',
-        label: 'FaceBook'
+        label: '点击广告'
       }, {
         value: '3',
-        label: 'TikTok'
+        label: '下载应用'
       }],
-      options2: [{
-        value: '1',
-        label: '1.0.2'
-      }, {
-        value: '1',
-        label: '1.0.3'
-      }, {
-        value: '1',
-        label: '1.0.4'
-      }],
-      date: ''
+      date: '',
+      input: '',
+      value: '',
     }
   },
   methods: {
@@ -60,8 +49,8 @@ export default {
       console.log('全部版本' + val);
     },
     inquire() {
-      const star = this.value[0]
-      const end = this.value[1]
+      const star = this.date[0]
+      const end = this.date[1]
       // console.log('开始时间:', star, '结束时间:', end);
       this.$emit('DateSelect', star, end);
     }
@@ -82,12 +71,8 @@ export default {
 
   .date-select {
     .el-button {
-      margin-left: 26px;
+      margin-left: 20px;
     }
-  }
-
-  .el-col {
-    margin-right: 26px;
   }
 }
 </style>

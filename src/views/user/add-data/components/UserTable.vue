@@ -1,6 +1,7 @@
 <template>
 <div class="usertable">
-  <el-table :data="tableData" style="width: 100%;padding: 0 40px;" :row-class-name="tableRowClassName">
+  <el-table :data="tableData" style="width: 100%;" :row-class-name="tableRowClassName" :header-cell-style="{
+  background:'#e3e3e3',height:'56px',color:'#101010',fontSize:'16px',padding:'0 40px'}" :cell-style="{'padding':'0 40px', 'height': '50px'}">
     <el-table-column prop="date" label="日期" min-width="100%">
     </el-table-column>
     <el-table-column prop="name" label="姓名" min-width="100%">
@@ -9,6 +10,8 @@
 </div>
 </template>
 <script>
+import { backgroundColor } from 'echarts/lib/theme/dark';
+
 export default {
   methods: {
     tableRowClassName({ row, rowIndex }) {
@@ -47,8 +50,9 @@ export default {
 .usertable{
   margin-top: 30px;
 
-  .el-table__header{
-    width: 100% !important;
-  }
+
 }
+.el-table__header{
+    border: 1px solid red;
+  }
 </style>
