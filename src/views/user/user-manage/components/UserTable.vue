@@ -4,19 +4,19 @@
       background: '#e3e3e3', height: '56px', color: '#101010', fontSize: '16px', padding: '0 40px','text-align':'center'
     }"
       :row-style="{ 'height': '20px','padding':'0' }">
-      <el-table-column prop="date" label="ID" width="140">
+      <el-table-column prop="date" label="ID" min-width="120">
       </el-table-column>
-      <el-table-column prop="name" label="昵称" width="240" align="center">
+      <el-table-column prop="name" label="昵称" min-width="200" align="center">
       </el-table-column>
-      <el-table-column prop="address" label="图像" width="240" align="center">
+      <el-table-column prop="address" label="图像" min-width="200" align="center">
       </el-table-column>
-      <el-table-column prop="sex" label="性别"  width="160" align="center">
+      <el-table-column prop="sex" label="性别"  min-width="140" align="center">
       </el-table-column>
-      <el-table-column prop="stats" label="属性" width="180" align="center">
+      <el-table-column prop="stats" label="属性" min-width="160" align="center">
       </el-table-column>
-      <el-table-column prop="stats" label="游戏时长"  width="200" align="center">
+      <el-table-column prop="stats" label="游戏时长"  min-width="200" align="center">
       </el-table-column>
-      <el-table-column prop="stats" label="注册时间"  width="240" align="center">
+      <el-table-column prop="stats" label="注册时间"  min-width="240" align="center">
       </el-table-column>
       <el-table-column fixed="right" label="操作" min-width="140" align="center">
         <template slot-scope="scope">

@@ -14,6 +14,7 @@
   </div>
 </template>
 <script>
+import echarts from 'echarts'
 export default {
   data() {
     return {
@@ -25,32 +26,40 @@ export default {
   },
   methods: {
     getCharts() {
-      const chartBox = this.$echarts.init(document.getElementById("maychar"));
-      const option = {
+      var myChart = echarts.init(document.getElementById('maychar'));
+
+      var option = {
+        tooltip: {
+          trigger: 'axis',
+          axisPointer: {
+            type: 'shadow',
+          },
+          backgroundColor: '#fff',
+          padding: [10, 15],
+          textStyle: {
+            color: '#333'
+          },
+          extraCssText:'box-shadow:0 0 10px rgba(0,0,0,0.2)',
+          snap: true,
+
+        },
         xAxis: {
           type: 'category',
-          data: ['A', 'B', 'C']
+          data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
         },
         yAxis: {
           type: 'value'
         },
         series: [
           {
-            data: [120, 250, 150],
+            name: '销售额',
             type: 'line',
-            lineStyle: {
-              normal: {
-                color: '#5c8fed',
-              }
-            }
+            data: [120, 132, 101, 144, 150, 130, 110],
+            color: '#6696ee'
           }
         ]
-      };
-      chartBox.setOption(option);
-      // 根据页面大小自动响应图表大小
-      window.addEventListener("resize", function () {
-        chartBox.resize();
-      });
+      }
+      myChart.setOption(option);
     }
 
   }

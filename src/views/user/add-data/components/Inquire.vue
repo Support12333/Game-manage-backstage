@@ -3,20 +3,20 @@
     <div class="title">新增用户分析</div>
     <el-row>
       <el-col :xs="12" :sm="12" :lg="3">
-        <el-select v-model="value" placeholder="全部渠道" @change="getChannelValue">
+        <el-select v-model="channel" placeholder="全部渠道" @change="getChannelValue">
           <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
           </el-option>
         </el-select>
       </el-col>
       <el-col :xs="12" :sm="12" :lg="3">
-        <el-select v-model="value" placeholder="全部版本" @change="getEditionValue">
+        <el-select v-model="edition" placeholder="全部版本" @change="getEditionValue">
           <el-option v-for="item in options2" :key="item.value" :label="item.label" :value="item.value">
           </el-option>
         </el-select>
       </el-col>
       <el-col :xs="12" :sm="12" :lg="14">
         <div class="date-select">
-          <el-date-picker v-model="value" type="daterange" range-separator="至" start-placeholder="开始日期"
+          <el-date-picker v-model="date" type="daterange" range-separator="至" start-placeholder="开始日期"
             end-placeholder="结束日期" value-format="yyyy-MM-dd">
           </el-date-picker>
           <el-button type="primary" @click="inquire">查询</el-button>
@@ -43,12 +43,14 @@ export default {
         value: '1',
         label: '1.0.2'
       }, {
-        value: '1',
+        value: '2',
         label: '1.0.3'
       }, {
-        value: '1',
+        value: '3',
         label: '1.0.4'
       }],
+      channel:'',
+      edition:'',
       date: ''
     }
   },
