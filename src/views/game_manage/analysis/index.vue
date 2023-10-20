@@ -27,17 +27,17 @@ export default {
         width: '120',
         align: "center"
       }, {
-        prop: 'game-name',
+        prop: 'game_name',
         label: '游戏名称',
         width: '120',
         align: "center"
       }, {
-        prop: 'user-number',
+        prop: 'user_number',
         label: '用户数',
         width: '120',
         align: "center"
       }, {
-        prop: 'ad-count',
+        prop: 'ad_count',
         label: '广告数',
         width: '120',
         align: "center"
@@ -47,7 +47,7 @@ export default {
         width: '120',
         align: "center"
       }, {
-        prop: 'game-analysis',
+        prop: 'game_analysis',
         label: '游戏分析（次）',
         width: '120',
         align: "center"
@@ -57,21 +57,21 @@ export default {
         width: '120',
         align: "center"
       }, {
-        prop: 'river-diversion',
+        prop: 'river_diversion',
         label: '导流数（次）',
         width: '120',
         align: "center"
       }],
       tableData: [{
-        date: '2016-05-02',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1518 弄',
-        sex: '女',
-        stats: '未',
-        sex1: '女',
-        stats1: '未',
-        sex2: '女',
-        stats2: '未'
+        ranking: 1,
+        type: '竞技',
+        game_name: 'COC',
+        user_number: 1000,
+        ad_count: 1000,
+        advertising: 10,
+        game_analysis: 99,
+        download: 1009,
+        river_diversion:123,
       },
       ]
     }
