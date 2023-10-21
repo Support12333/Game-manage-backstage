@@ -1,6 +1,6 @@
 <template>
   <div class="ad-game">
-    <el-row :gutter="300">
+    <el-row :gutter="200">
       <el-col :xs="12" :sm="12" :lg="8" v-for="(item, index) in datalist" :key="index" class="card-panel-col">
         <panel :title="item.title" :totality="item.totality" :today_text="item.today_text" :today="item.today"
           :yesterday_text="item.yesterday_text" :yesterday="item.yesterday" :colors="colors[index]" />
