@@ -21,11 +21,11 @@ export const constantRoutes = [
   {
     path: '/',
     component: Layout,
-    redirect: '/home',
+    redirect: '/dashboard',
     children: [{
-      path: 'home',
+      path: 'dashboard',
       name: '数据概况',
-      component: () => import('@/views/home/index'),
+      component: () => import('@/views/dashboard/index'),
       meta: { title: '数据概况', icon: 'el-icon-s-home' }
     }]
   },
@@ -123,8 +123,8 @@ export const constantRoutes = [
     meta: { title: '广告管理', icon: 'advertisement' },
     children: [
       {
-        path: 'game-advertising',
-        component: () => import('@/views/advertisement/game-advertising.vue'), // Parent router-view
+        path: 'ad-game',
+        component: () => import('@/views/advertisement/ad-game.vue'), // Parent router-view
         name: '游戏广告分析',
         meta: { title: '游戏广告分析' }
       },
