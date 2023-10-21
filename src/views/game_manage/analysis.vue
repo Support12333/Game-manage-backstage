@@ -1,5 +1,6 @@
 <template>
   <div class="analysis">
+    <div class="title">游戏分析</div>
     <div class="usertable">
       <el-table :data="tableData" border style="width: 100%;" :row-class-name="tableRowClassName" align="center"
         :header-cell-style="{
@@ -19,7 +20,7 @@ export default {
       cols: [{
         prop: 'ranking',
         label: '排名',
-        width: '120',
+        width: '100',
         align: "center"
       }, {
         prop: 'type',
@@ -29,7 +30,7 @@ export default {
       }, {
         prop: 'game_name',
         label: '游戏名称',
-        width: '120',
+        width: '140',
         align: "center"
       }, {
         prop: 'user_number',
@@ -92,5 +93,17 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-.analysis {}
+.analysis {
+  background: #fff;
+  padding: 32px;
+
+  .title{
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+    color: #101010;
+    font-weight: bold;
+    margin-bottom: 32px;
+  }
+}
 </style>

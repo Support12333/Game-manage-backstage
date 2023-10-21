@@ -1,7 +1,7 @@
 <template>
 <div class="usertable">
   <el-table :data="tableData" style="width: 100%;" :row-class-name="tableRowClassName" :header-cell-style="{
-  background:'#e3e3e3',height:'56px',color:'#101010',fontSize:'16px',padding:'0 40px'}" :cell-style="{'padding':'0 40px', 'height': '50px'}">
+  background:'#e3e3e3',height:'56px',color:'#101010',fontSize:'16px',padding:'0 32px'}" :cell-style="{'padding':'0 40px', 'height': '50px'}">
     <el-table-column prop="date" label="日期" min-width="100%">
     </el-table-column>
     <el-table-column prop="name" label="姓名" min-width="100%">

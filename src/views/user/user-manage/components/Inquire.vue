@@ -60,7 +60,7 @@ export default {
 <style lang="scss" scoped>
 .inquire {
   background: #fff;
-  padding: 20px 40px;
+  padding: 20px 32px;
 
   .title {
     font-size: 16px;

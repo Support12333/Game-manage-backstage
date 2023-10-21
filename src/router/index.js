@@ -5,31 +5,6 @@ Vue.use(Router)
 
 /* Layout */
 import Layout from '@/layout'
-
-/**
- * Note: sub-menu only appear when route children.length >= 1
- * Detail see: https://panjiachen.github.io/vue-element-admin-site/guide/essentials/router-and-nav.html
- *
- * hidden: true                   if set true, item will not show in the sidebar(default is false)
- * alwaysShow: true               if set true, will always show the root menu
- *                                if not set alwaysShow, when item has more than one children route,
- *                                it will becomes nested mode, otherwise not show the root menu
- * redirect: noRedirect           if set noRedirect will no redirect in the breadcrumb
- * name:'router-name'             the name is used by <keep-alive> (must set!!!)
- * meta : {
-    roles: ['admin','editor']    control the page roles (you can set multiple roles)
-    title: 'title'               the name show in sidebar and breadcrumb (recommend set)
-    icon: 'svg-name'/'el-icon-x' the icon show in the sidebar
-    breadcrumb: false            if set false, the item will hidden in breadcrumb(default is true)
-    activeMenu: '/example/list'  if set path, the sidebar will highlight the path you set
-  }
- */
-
-/**
- * constantRoutes
- * a base page that does not have permission requirements
- * all roles can be accessed
- */
 export const constantRoutes = [
   {
     path: '/login',
@@ -73,6 +48,12 @@ export const constantRoutes = [
         name: '用户管理',
         component: () => import('@/views/user/user-manage'),
         meta: { title: '用户管理' }
+      },
+      {
+        path: '/details',
+        name: '详情',
+        component: () => import('@/views/user/user-manage/details.vue'),
+        hidden: true
       }
     ]
   },
@@ -110,19 +91,19 @@ export const constantRoutes = [
     children: [
       {
         path: 'analysis',
-        component: () => import('@/views/game_manage/analysis/index'), // Parent router-view
+        component: () => import('@/views/game_manage/analysis'), // Parent router-view
         name: '游戏分析',
         meta: { title: '游戏分析' }
       },
       {
-        path: 'list',
-        component: () => import('@/views/game_manage/list/index'),
+        path: 'game-list',
+        component: () => import('@/views/game_manage/game-list'),
         name: '游戏列表',
         meta: { title: '游戏列表' }
       },
       {
         path: 'advertising-list',
-        component: () => import('@/views/game_manage/advertising-list/index'),
+        component: () => import('@/views/game_manage/advertising-list'),
         name: '游戏广告列表',
         meta: { title: '游戏广告列表' }
       }

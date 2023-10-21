@@ -74,7 +74,7 @@ export default {
     justify-content: space-between;
     align-items: center;
     height: 56px;
-    padding: 0 40px;
+    padding: 0 32px;
     background: #e3e3e3;
 
     .title {
