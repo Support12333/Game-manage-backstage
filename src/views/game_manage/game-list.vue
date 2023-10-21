@@ -12,7 +12,7 @@
       </el-row>
     </div>
     <div class="gametable">
-      <el-button type="primary" style="float: right;margin-bottom: 8px;">添加游戏</el-button>
+      <el-button type="primary" style="float: right;margin-bottom: 8px;" @click="addClick">添加游戏</el-button>
       <el-table :data="tableData" border style="width: 100%;" align="center"
         :header-cell-style="{
           height: '56px', color: '#101010', fontSize: '16px', padding: '0 40px', 'text-align': 'center'
@@ -102,6 +102,9 @@ export default {
   methods: {
     getValue(val) {
       console.log('全部游戏' + val);
+    },
+    addClick() {
+      this.$router.push({ path: '/add-game' })
     }
   }
 };

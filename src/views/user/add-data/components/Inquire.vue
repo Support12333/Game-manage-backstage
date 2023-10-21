@@ -1,7 +1,7 @@
 <template>
   <div class="inquire">
     <div class="title">新增用户分析</div>
-    <el-row>
+    <el-row :gutter="20">
       <el-col :xs="12" :sm="12" :lg="3">
         <el-select v-model="channel" placeholder="全部渠道" @change="getChannelValue">
           <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
@@ -86,10 +86,6 @@ export default {
     .el-button {
       margin-left: 26px;
     }
-  }
-
-  .el-col {
-    margin-right: 26px;
   }
 }
 </style>

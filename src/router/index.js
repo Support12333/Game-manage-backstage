@@ -41,7 +41,7 @@ export const constantRoutes = [
         path: 'add-data',
         name: '新增用户',
         component: () => import('@/views/user/add-data'),
-        meta: { title: '新增用户'}
+        meta: { title: '新增用户' }
       },
       {
         path: 'user-manage',
@@ -106,6 +106,12 @@ export const constantRoutes = [
         component: () => import('@/views/game_manage/advertising-list'),
         name: '游戏广告列表',
         meta: { title: '游戏广告列表' }
+      },
+      {
+        path: '/add-game',
+        name: '详情',
+        component: () => import('@/views/game_manage/feature/add-game.vue'),
+        hidden: true
       }
     ]
   },
