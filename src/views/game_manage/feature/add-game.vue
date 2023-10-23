@@ -1,5 +1,6 @@
 <template>
   <div class="game">
+    <!-- <div class="title">添加游戏</div> -->
     <el-form ref="ruleForm" :rules="rules" :model="ruleForm" label-width="200px">
       <el-form-item label="游戏名称:" prop="name">
         <el-input v-model="ruleForm.name" placeholder="请输入游戏名称" style="width: 400px;"></el-input>
@@ -34,18 +35,17 @@
           <el-checkbox label="选项四" name="ad_position"></el-checkbox>
         </el-checkbox-group>
       </el-form-item>
-      <!-- <el-form-item label="游戏LOGO:" v-model="logo">
-        <upload v-model="ruleForm.logo" />
+      <el-form-item label="游戏LOGO:" prop="logo" class="logo">
+        <upload :limit="1" :file-list="ruleForm.logo" @getUrl="getUrl($event)" />
       </el-form-item>
-      <el-form-item label="游戏主图:" v-model="master_map">
-        <upload v-model="ruleForm.master_map"/>
-      </el-form-item> -->
+       <el-form-item label="游戏主图:" prop="master_map">
+        <upload :limit="1" :file-list="ruleForm.master_map" @getUrl="getUrl($event)" />
+      </el-form-item>
       <el-form-item label="活动描述" prop="describe">
         <el-input type="textarea" resize="none" :rows="4" v-model="ruleForm.describe" style="width: 400px;"></el-input>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" @click="submitForm">提交</el-button>
-        <!-- <el-button>取消</el-button> -->
+        <el-button type="primary" @click="submitForm('ruleForm')">提交</el-button>
       </el-form-item>
     </el-form>
   </div>
@@ -62,10 +62,10 @@ export default {
         type: '',
         Language: '',
         ad_position: [],
+        logo: [],
+        master_map:[],
         describe: ''
       },
-      imageUrl: '',
-      describe: '',
       rules: {
         name: [
           { required: true, message: '请输入游戏名称', trigger: 'blur' },
@@ -87,7 +87,9 @@ export default {
         describe: [
           { required: true, message: '请填写活动描述', trigger: 'blur' }
         ]
-      }
+      },
+      imageUrl: '',
+      describe: '',
     }
   },
   components: {
@@ -104,8 +106,9 @@ export default {
         }
       });
     },
-    resetForm(formName) {
-      this.$refs[formName].resetFields();
+    getUrl(getUrl) {
+      console.log(getUrl,'1')
+      this.$refs.ruleForm.validateField('fileList') // 手动触发fileList校验规则
     }
   }
 }
@@ -115,10 +118,17 @@ export default {
   padding: 32px;
   background-color: #fff;
 
+  .title{
+    font-size: 16px;
+    color: rgba(144, 147, 153, 1);
+    font-weight: 800;
+    margin-bottom: 20px;
+  }
+
   .el-form {
 
     .el-form-item {
-      margin-bottom: 32px;
+      margin-bottom: 20px;
     }
 
     .el-radio {
@@ -135,6 +145,23 @@ export default {
       width: 240px;
       padding: 18px 20px;
       margin-top: 40px;
+    }
+
+    .logo{
+      .el-upload{
+        width: 100px;
+        height: 100px;
+        line-height: 100px;
+      }
+
+      .avatar-uploader>.el-upload-list>.el-upload-list__item{
+        width: 100px;
+        height: 100px;
+      }
+      .avatar-uploader>.el-upload-list>.el-upload-list__item>img{
+        width: 100px;
+        height: 100px;
+      }
     }
   }
 }

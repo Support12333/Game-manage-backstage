@@ -2,7 +2,7 @@
   <div class="usertable">
     <el-table :data="tableData" border style="width: 100%;" align="center"
       :header-cell-style="{
-        background: '#e3e3e3', height: '56px', color: '#101010', fontSize: '16px', padding: '0 32px', 'text-align': 'center'
+        background: '#e3e3e3', height: '56px', color: '#101010', fontSize: '16px', 'text-align': 'center'
       }" :row-style="{ 'height': '20px', 'padding': '0' }">
       <el-table-column prop="date" label="ID" min-width="120">
       </el-table-column>
