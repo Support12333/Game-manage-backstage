@@ -57,6 +57,9 @@ import { validUsername } from '@/utils/validate'
 
 export default {
   name: 'Login',
+  created() {
+    this.$router.push("/");
+  },
   data() {
     const validateUsername = (rule, value, callback) => {
       if (!validUsername(value)) {
@@ -106,8 +109,8 @@ export default {
       })
     },
     handleLogin() {
-      console.log(111);
-      // this.$router.push({ path: '/dashboard' })
+      // console.log(111);
+      // this.$router.push("/");
       this.$refs.loginForm.validate(valid => {
         if (valid) {
           this.loading = true
