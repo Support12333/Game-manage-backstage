@@ -31,28 +31,28 @@ export const constantRoutes = [
   },
 
   {
-    path: '/user',
+    path: '/user-analyze',
     component: Layout,
-    redirect: '/user/table',
+    redirect: '/user-analyze/table',
     name: '用户分析',
     meta: { title: '用户分析', icon: 'el-icon-user-solid' },
     children: [
       {
         path: 'add-data',
         name: '新增用户',
-        component: () => import('@/views/user/add-data'),
+        component: () => import('@/views/user-analyze/add-data'),
         meta: { title: '新增用户' }
       },
       {
         path: 'user-manage',
         name: '用户管理',
-        component: () => import('@/views/user/user-manage'),
+        component: () => import('@/views/user-analyze/user-manage'),
         meta: { title: '用户管理' }
       },
       {
         path: '/details',
         name: '详情',
-        component: () => import('@/views/user/user-manage/details.vue'),
+        component: () => import('@/views/user-analyze/user-manage/details.vue'),
         hidden: true
       }
     ]
