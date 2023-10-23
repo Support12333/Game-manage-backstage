@@ -1,5 +1,5 @@
 <template>
-    <div style="background-color: #fff;">
+    <div style="background-color: #fff;border-radius: 6px;">
       <div id="maychar" style="height:400px;width:100%"></div>
     </div>
 </template>

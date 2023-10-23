@@ -5,12 +5,12 @@
     <div class="totality">{{ totality }}</div>
     <div class="card-time">
       <div class="card-left">
-        <div class="today_text">{{ today_text }}</div>
+        <div class="text">{{ today_text }}</div>
         <div class="today">{{ today }}</div>
       </div>
       <div class="card-right">
-        <div class="yesterday_text">{{ yesterday_text }}</div>
-        <div class="yesterday">{{ yesterday }}</div>
+        <div class="text">{{ yesterday_text }}</div>
+        <div class="today">{{ yesterday }}</div>
       </div>
     </div>
   </div>
@@ -55,14 +55,20 @@ export default {
 <style lang="scss" scoped>
 .content {
   height: 148px;
-  font-size: 14px;
-  color: #fff;
   padding: 16px 30px;
   background: #bc8ef7;
   border-radius: 10px;
 
+  .title,
+  .text,
+  .today {
+    font-size: 16px;
+    color: #fff;
+  }
+
   .totality {
-    font-size: 22px;
+    font-size: 24px;
+    color: #fff;
     font-weight: bold;
     margin-top: 8px;
   }

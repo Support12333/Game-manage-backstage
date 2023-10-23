@@ -25,7 +25,7 @@
     </div>
     <div class="gametable">
       <el-table :data="tableData" border style="width: 100%;" align="center" :header-cell-style="{
-        height: '56px', color: '#101010', fontSize: '16px', padding: '0 40px', 'text-align': 'center'
+        height: '56px', color: '#101010', fontSize: '16px', 'text-align': 'center'
       }" :row-style="{ 'height': '20px', 'padding': '0' }">
         <el-table-column prop='sort' label="排序" min-width="110" align="center" />
         <el-table-column prop='type' label="类型" min-width="110" align="center" />

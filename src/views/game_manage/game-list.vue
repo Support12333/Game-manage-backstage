@@ -15,7 +15,7 @@
       <el-button type="primary" style="float: right;margin-bottom: 8px;" @click="addClick">添加游戏</el-button>
       <el-table :data="tableData" border style="width: 100%;" align="center"
         :header-cell-style="{
-          height: '56px', color: '#101010', fontSize: '16px', padding: '0 40px', 'text-align': 'center'
+          height: '56px', color: '#101010', fontSize: '16px', 'text-align': 'center'
         }" :row-style="{ 'height': '20px', 'padding': '0' }">
         <template v-for="(item, index) in cols">
           <el-table-column :key="index" :prop=item.prop :label="item.label" :min-width="item.width" :align="item.align" />

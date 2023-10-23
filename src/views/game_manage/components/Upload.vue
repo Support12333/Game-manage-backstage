@@ -1,15 +1,13 @@
 <template>
   <div>
-    <el-form>
-      <el-upload :limit="limit" action accept="image/*" :on-change="uploadFile" list-type="picture-card"
-        :auto-upload="false" :file-list="fileList" :on-exceed="handleExceed" :on-preview="handlePictureCardPreview"
-        :on-remove="handleRemove" ref="upload" class="avatar-uploader" :class="{ hide: showUpload }" :disabled="disabled">
-        <i class="el-icon-plus"></i>
-      </el-upload>
-      <el-dialog width="30%" :visible.sync="dialogVisible">
-        <img width="100%" :src="imgUrl.url" alt />
-      </el-dialog>
-    </el-form>
+    <el-upload :limit="limit" action accept="image/*" :on-change="uploadFile" list-type="picture-card"
+      :auto-upload="false" :file-list="fileList" :on-exceed="handleExceed" :on-preview="handlePictureCardPreview"
+      :on-remove="handleRemove" ref="upload" class="avatar-uploader" :class="{ hide: showUpload }" :disabled="disabled">
+      <i class="el-icon-plus"></i>
+    </el-upload>
+    <el-dialog width="30%" :visible.sync="dialogVisible">
+      <img width="100%" :src="imgUrl.url" alt />
+    </el-dialog>
   </div>
 </template>
 
