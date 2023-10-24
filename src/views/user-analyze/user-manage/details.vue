@@ -10,17 +10,17 @@
                 alt=""></div>
           </el-col>
           <el-col :span="6" class="article">
-            <div>用户id：123</div>
-            <div>注册时间：123</div>
-            <div>登录方式：邮箱/手机</div>
+            <div>用户id：{{ details.id }}</div>
+            <div>注册时间：{{details.signTime}}</div>
+            <div>登录方式：{{details.account}}</div>
           </el-col>
           <el-col :span="6" class="article">
-            <div>昵称：123</div>
-            <div>最近登录时间：123</div>
-            <div>邮箱账户：邮箱/手机</div>
+            <div>昵称：{{details.userName}}</div>
+            <div>最近登录时间：{{details.recentLoginTime}}</div>
+            <div>账户：{{details.emailAccount||'无'}} / {{ details.phoneAccount }}</div>
           </el-col>
           <el-col :span="6" class="article">
-            <div>性别：女</div>
+            <div>性别：{{details.userSex}}</div>
           </el-col>
         </el-row>
       </div>
@@ -30,8 +30,12 @@
       <div class="centent">
         <el-row :gutter="20">
           <el-col :span="6" class="article">
-            <div>注册游戏：123</div>
-            <div>游戏时长：123</div>
+            <div class="desc">注册游戏：
+              <template v-for="item in details.gameNameAll">
+                <span>{{ item }}</span>
+              </template>
+            </div>
+            <div>游戏时长：{{details.gameTimeAll}}</div>
           </el-col>
           <el-col :span="6" class="article">
 
@@ -47,11 +51,19 @@
   </div>
 </template>
 <script>
+import { GetUserInfoById } from '@/api/page'
 export default {
   data() {
     return {
+      details: {}
     }
   },
+  created() {
+    const id = this.$route.query.id
+    GetUserInfoById(id).then(res => {
+      this.details = res.data
+    })
+  }
 };
 </script>
 <style lang="scss" scoped>
@@ -77,9 +89,13 @@ export default {
       font-size: 16px;
 
       >div+div {
-        margin-top: 26px;
+        margin-top: 28px;
       }
     }
+
+    span{
+        margin-right: 20px;
+      }
   }
 }
 </style>

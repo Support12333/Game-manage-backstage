@@ -2,10 +2,9 @@
   <div class="analysis">
     <div class="title">游戏分析</div>
     <div class="table">
-      <el-table :data="tableData" border style="width: 100%;"  align="center"
-        :header-cell-style="{
-          height: '56px', color: '#101010', fontSize: '16px', 'text-align': 'center'
-        }" :row-style="{ 'height': '20px', 'padding': '0' }">
+      <el-table :data="tableData" border style="width: 100%;" align="center" :header-cell-style="{
+        height: '56px', color: '#101010', fontSize: '16px', 'text-align': 'center'
+      }" :row-style="{ 'height': '20px', 'padding': '0' }">
         <template v-for="(item, index) in cols">
           <el-table-column :key="index" :prop=item.prop :label="item.label" :min-width="item.width" :align="item.align" />
         </template>
@@ -14,70 +13,68 @@
   </div>
 </template>
 <script>
+import { GetPageByGameAnalysis } from '@/api/game'
 export default {
   data() {
     return {
       cols: [{
-        prop: 'ranking',
+        prop: 'rank',
         label: '排名',
         width: '100',
         align: "center"
       }, {
-        prop: 'type',
+        prop: 'typeName',
         label: '类型',
         width: '120',
         align: "center"
       }, {
-        prop: 'game_name',
+        prop: 'gameName',
         label: '游戏名称',
         width: '140',
         align: "center"
       }, {
-        prop: 'user_number',
+        prop: 'userNum',
         label: '用户数',
         width: '120',
         align: "center"
       }, {
-        prop: 'ad_count',
+        prop: 'advNum',
         label: '广告数',
         width: '120',
         align: "center"
       }, {
-        prop: 'advertising',
+        prop: 'advGameNum',
         label: '广告展示（次）',
         width: '120',
         align: "center"
       }, {
-        prop: 'game_analysis',
+        prop: 'gameShareNum',
         label: '游戏分析（次）',
         width: '120',
         align: "center"
       }, {
-        prop: 'download',
+        prop: 'downloadNum',
         label: '应用下载（次）',
         width: '120',
         align: "center"
       }, {
-        prop: 'river_diversion',
+        prop: 'diversionNum',
         label: '导流数（次）',
         width: '120',
         align: "center"
       }],
-      tableData: [{
-        ranking: 1,
-        type: '竞技',
-        game_name: 'COC',
-        user_number: 1000,
-        ad_count: 1000,
-        advertising: 10,
-        game_analysis: 99,
-        download: 1009,
-        river_diversion:123,
-      },
-      ]
+      tableData: [],
+      params:{ page: 1, pageSize: 10,}
     }
   },
+  created() {
+    GetPageByGameAnalysis(this.params).then(res => {
+      console.log(res);
+      this.tableData = res.data
+    })
+  },
   methods: {
+
   },
 }
 </script>
@@ -86,7 +83,7 @@ export default {
   background: #fff;
   padding: 32px;
 
-  .title{
+  .title {
     display: flex;
     align-items: center;
     font-size: 18px;

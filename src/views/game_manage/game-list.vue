@@ -13,24 +13,24 @@
     </div>
     <div class="gametable">
       <el-button type="primary" style="float: right;margin-bottom: 8px;" @click="addClick">添加游戏</el-button>
-      <el-table :data="tableData" border style="width: 100%;" align="center"
-        :header-cell-style="{
-          height: '56px', color: '#101010', fontSize: '16px', 'text-align': 'center'
-        }" :row-style="{ 'height': '20px', 'padding': '0' }">
+      <el-table :data="tableData" border style="width: 100%;" align="center" :header-cell-style="{
+        height: '56px', color: '#101010', fontSize: '16px', 'text-align': 'center'
+      }" :row-style="{ 'height': '20px', 'padding': '0' }">
         <template v-for="(item, index) in cols">
           <el-table-column :key="index" :prop=item.prop :label="item.label" :min-width="item.width" :align="item.align" />
         </template>
         <el-table-column fixed="right" label="操作" min-width="140" align="center">
-        <template slot-scope="scope">
-          <el-button @click="handleClick(scope.row)" type="text" size="small">植入广告</el-button>
-          <el-button @click="handleClick(scope.row)" type="text" size="small">详情</el-button>
-        </template>
-      </el-table-column>
+          <template slot-scope="scope">
+            <el-button @click="handleClick(scope.row)" type="text" size="small">植入广告</el-button>
+            <el-button @click="handleClick(scope.row)" type="text" size="small">详情</el-button>
+          </template>
+        </el-table-column>
       </el-table>
     </div>
   </div>
 </template>
 <script>
+import { GetpageByGame } from '@/api/game'
 export default {
   data() {
     return {
@@ -43,34 +43,34 @@ export default {
       }, {
         value: '3',
         label: '米兔环境'
-        }],
-        cols: [{
-        prop: 'sort',
+      }],
+      cols: [{
+        prop: 'id',
         label: '排序',
         width: '100',
         align: "center"
       }, {
-        prop: 'type',
+        prop: 'typeName',
         label: '类型',
         width: '100',
         align: "center"
       }, {
-        prop: 'carrier',
+        prop: 'carrierName',
         label: '载体',
         width: '120',
         align: "center"
       }, {
-        prop: 'language',
+        prop: 'languageName',
         label: '语言',
         width: '120',
         align: "center"
       }, {
-        prop: 'game_logo',
+        prop: 'gameLogo',
         label: '游戏LOGO',
         width: '140',
         align: "center"
       }, {
-        prop: 'game_name',
+        prop: 'gameName',
         label: '游戏名称',
         width: '140',
         align: "center"
@@ -85,19 +85,17 @@ export default {
         width: '120',
         align: "center"
       }],
-        tableData: [{
-          sort: 1,
-        type: '竞技',
-        carrier: 'COC',
-        language: 1000,
-        game_logo: 1000,
-        game_name: 10,
-        add_people: 99,
-        add_time: 1009,
-      },
-      ],
-      value: ''
+      tableData: [],
+      value: '',
+      params: {
+        page: 1,
+        pageSize: 10,
+      }
     }
+  },
+
+  created() {
+    this.getpageByGame()
   },
   methods: {
     getValue(val) {
@@ -105,7 +103,14 @@ export default {
     },
     addClick() {
       this.$router.push({ path: '/add-game' })
+    },
+    getpageByGame() {
+      GetpageByGame(this.params).then(res => {
+        console.log(res);
+        this.tableData = res.data
+      })
     }
+
   }
 };
 </script>
@@ -122,7 +127,7 @@ export default {
   }
 }
 
-.gametable{
+.gametable {
   margin-top: 30px;
 }
 </style>
