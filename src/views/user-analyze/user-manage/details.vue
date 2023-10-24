@@ -17,7 +17,7 @@
           <el-col :span="6" class="article">
             <div>昵称：{{details.userName}}</div>
             <div>最近登录时间：{{details.recentLoginTime}}</div>
-            <div>账户：{{details.emailAccount||'无'}} / {{ details.phoneAccount }}</div>
+            <div>账户：{{account}}</div>
           </el-col>
           <el-col :span="6" class="article">
             <div>性别：{{details.userSex}}</div>
@@ -55,13 +55,24 @@ import { GetUserInfoById } from '@/api/page'
 export default {
   data() {
     return {
-      details: {}
+      details: {},
+      account:'',
     }
   },
   created() {
     const id = this.$route.query.id
     GetUserInfoById(id).then(res => {
       this.details = res.data
+      if (res.data.emailAccount) {
+        this.account = res.data.emailAccount
+      }
+      if (res.data.phoneAccount) {
+        if (this.account.length > 0) {
+          this.account = this.account+'/'+res.data.phoneAccount
+        } else {
+          this.account = res.data.phoneAccount
+        }
+      }
     })
   }
 };

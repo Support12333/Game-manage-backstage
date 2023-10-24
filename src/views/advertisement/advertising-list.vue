@@ -22,6 +22,7 @@
   </div>
 </template>
 <script>
+import { GetAdvList } from '@/api/advertisement'
 export default {
   data() {
     return {
@@ -65,23 +66,21 @@ export default {
         label: '游戏名称',
         width: '140',
         align: "center"
-      },  {
+      }, {
         prop: 'add_time',
         label: '添加时间',
         width: '120',
         align: "center"
       }],
-      tableData: [{
-        sort: 1,
-        ad_id: '竞技',
-        type: 'COC',
-        ad_name: 1000,
-        ad_cover: 1000,
-        ad_address: 10,
-        add_time: 1009,
-      },
-      ]
+      tableData: [],
+      params: {
+        page: 1,
+        pageSize: 10
+      }
     }
+  },
+  created() {
+    this.getPageByGameAdv()
   },
   methods: {
     getValue(val) {
@@ -89,6 +88,11 @@ export default {
     },
     addClick() {
       this.$router.push({ path: '/add-game' })
+    },
+    getAdvList() {
+      GetAdvList(this.params).then(res => {
+        this.tableData = res.data
+      })
     }
   }
 };
@@ -97,6 +101,7 @@ export default {
 .inquire {
   background: #fff;
   padding: 20px 32px;
+  margin-bottom: 26px;
 
   .title {
     font-size: 16px;

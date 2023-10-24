@@ -108,7 +108,8 @@ export default {
       });
     },
     getUrl(getUrl) {
-      console.log(getUrl,'1')
+      console.log(getUrl, '1')
+
       this.$refs.ruleForm.validateField('fileList') // 手动触发fileList校验规则
     }
   }

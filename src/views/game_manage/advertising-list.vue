@@ -52,6 +52,7 @@
   </div>
 </template>
 <script>
+import { GetPageByGameAdv } from '@/api/game'
 export default {
   data() {
     return {
@@ -83,22 +84,22 @@ export default {
         label: '米兔环境'
       }],
       cols: [{
-        prop: 'sort',
+        prop: 'advId',
         label: '排序',
         width: '110',
         align: "center"
       }, {
-        prop: 'type',
+        prop: 'typeName',
         label: '类型',
         width: '110',
         align: "center"
       }, {
-        prop: 'carrier',
+        prop: 'carrierName',
         label: '载体',
         width: '120',
         align: "center"
       }, {
-        prop: 'language',
+        prop: 'languageName',
         label: '语言',
         width: '120',
         align: "center"
@@ -108,7 +109,7 @@ export default {
         width: '140',
         align: "center"
       }, {
-        prop: 'ad_name',
+        prop: 'advName',
         label: '广告名称',
         width: '140',
         align: "center"
@@ -119,31 +120,27 @@ export default {
         align: "center"
       }, {
         prop: 'ad_status',
-        label: '游戏状态',
+        label: '广告状态',
         width: '140',
         align: "center"
       }, {
-        prop: 'ad_time',
+        prop: 'advStartTime',
         label: '广告时间',
         width: '140',
         align: "center"
       }],
-      tableData: [{
-        sort: 1,
-        type: '竞技',
-        carrier: 'COC',
-        language: 1000,
-        game_name: 10,
-        ad_name: 99,
-        ad_position: 1009,
-        status: 1,
-        ad_time: 1009,
+      tableData: [],
+      params: {
+        page: 1,
+        pageSize: 10
       },
-      ],
       value: '',
       value2: '',
       value3: ''
     }
+  },
+  created() {
+    this.getPageByGameAdv()
   },
   methods: {
     getAdValue(val) {
@@ -158,6 +155,12 @@ export default {
 
     stateChanged(row) {
       console.log(row);
+    },
+    //列表
+    getPageByGameAdv() {
+      GetPageByGameAdv(this.params).then(res => {
+        this.tableData = res.data
+      })
     }
   }
 };
