@@ -1,7 +1,7 @@
 <template>
   <div class="table">
     <div class="inquire">
-      <div class="title">游戏列表</div>
+      <div class="title">广告列表</div>
       <el-row>
         <el-col :xs="12" :sm="12" :lg="3">
           <el-select v-model="value" placeholder="全部游戏" @change="getValue">
@@ -42,22 +42,22 @@ export default {
         width: '100',
         align: "center"
       }, {
-        prop: 'ad_id',
+        prop: 'id',
         label: '广告ID',
         width: '100',
         align: "center"
       }, {
-        prop: 'type',
+        prop: 'advTypeId',
         label: '类型',
         width: '120',
         align: "center"
       }, {
-        prop: 'ad_name',
+        prop: 'advName',
         label: '广告名称',
         width: '120',
         align: "center"
       }, {
-        prop: 'ad_cover',
+        prop: 'advImg',
         label: '广告封面',
         width: '140',
         align: "center"

@@ -2,89 +2,90 @@
   <div class="game">
     <!-- <div class="title">添加游戏</div> -->
     <el-form ref="ruleForm" :rules="rules" :model="ruleForm" label-width="200px">
-      <el-form-item label="游戏名称:" prop="name">
-        <el-input v-model="ruleForm.name" placeholder="请输入游戏名称" style="width: 400px;"></el-input>
+      <el-form-item label="游戏名称:" prop="gameName">
+        <el-input v-model="ruleForm.gameName" placeholder="请输入游戏名称" style="width: 400px;"></el-input>
       </el-form-item>
-      <el-form-item label="游戏载体:" prop="carrier">
-        <el-radio-group v-model="ruleForm.carrier">
-          <el-radio label="安卓"></el-radio>
-          <el-radio label="H5"></el-radio>
+      <el-form-item label="游戏载体:" prop="carrierId">
+        <el-radio-group v-model="ruleForm.carrierId" v-for="item in CarrierList" :key="item.id">
+          <el-radio :label=item.id>{{ item.carrierName }}</el-radio>
         </el-radio-group>
       </el-form-item>
-      <el-form-item label="游戏类型:" prop="type">
-        <el-radio-group v-model="ruleForm.type">
-          <el-radio label="三消"></el-radio>
-          <el-radio label="解压"></el-radio>
-          <el-radio label="跑酷"></el-radio>
-          <el-radio label="其他"></el-radio>
+      <el-form-item label="游戏类型:" prop="gameType">
+        <el-radio-group v-model="ruleForm.gameType" v-for="item in GameTypeList" :key="item.id">
+          <el-radio :label=item.id>{{ item.typeName }}</el-radio>
         </el-radio-group>
       </el-form-item>
-      <el-form-item label="游戏语言:" prop="Language">
-        <el-radio-group v-model="ruleForm.Language">
-          <el-radio label="英语"></el-radio>
-          <el-radio label="葡萄牙语"></el-radio>
-          <el-radio label="印度语"></el-radio>
-          <el-radio label="其他"></el-radio>
+      <el-form-item label="游戏语言:" prop="languageId">
+        <el-radio-group v-model="ruleForm.languageId" v-for="item in LanguageList" :key="item.id">
+          <el-radio :label=item.id>{{ item.languageName }}</el-radio>
         </el-radio-group>
       </el-form-item>
-      <el-form-item label="广告位置" prop="ad_position">
-        <el-checkbox-group v-model="ruleForm.ad_position">
-          <el-checkbox label="选项一" name="ad_position"></el-checkbox>
-          <el-checkbox label="选项二" name="ad_position"></el-checkbox>
-          <el-checkbox label="选项三" name="ad_position"></el-checkbox>
-          <el-checkbox label="选项四" name="ad_position"></el-checkbox>
+      <el-form-item label="广告位置" prop="advPositionIdsArray">
+        <el-checkbox-group v-model="ruleForm.advPositionIdsArray">
+          <el-checkbox v-for="(item,index) in AdPositionIds" :key="index" :label="item.id">{{ item.advPositionName}}</el-checkbox>
         </el-checkbox-group>
       </el-form-item>
-      <el-form-item label="游戏LOGO:" prop="logo" class="logo">
-        <upload :limit="1" :file-list="ruleForm.logo" @getUrl="getUrl($event)" />
+      <el-form-item label="游戏LOGO:" prop="gameLogo" class="logo">
+        <upload :limit="1" :file-list="logoImgList" @getUrl="getLogoUrl($event)" />
       </el-form-item>
-       <el-form-item label="游戏主图:" prop="master_map">
-        <upload :limit="1" :file-list="ruleForm.master_map" @getUrl="getUrl($event)" />
+      <el-form-item label="游戏主图:" prop="gameImg">
+        <upload :limit="1" :file-list="mapImgList" @getUrl="getMasterUrl($event)" />
       </el-form-item>
-      <el-form-item label="活动描述" prop="describe">
-        <el-input type="textarea" resize="none" :rows="4" v-model="ruleForm.describe" style="width: 400px;"></el-input>
+      <el-form-item label="活动描述" prop="gameDesc">
+        <el-input type="textarea" resize="none" :rows="4" v-model="ruleForm.gameDesc" style="width: 400px;"></el-input>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="submitForm('ruleForm')">提交</el-button>
+        <el-button style="margin-left: 30px;" @click="Back">返回</el-button>
       </el-form-item>
     </el-form>
   </div>
 </template>
 <script>
 import Upload from '../components/Upload.vue'
+import { GetLanguage, GetGameType, GetCarrier, GetADPosition } from '@/api/tool'
+import { AddGame } from '@/api/game'
 
 export default {
   data() {
     return {
+      logoImgList: [],
+      mapImgList: [],
+      CarrierList: [],
+      GameTypeList: [],
+      LanguageList: [],
+      AdPositionIds: [],
       ruleForm: {
-        name: '',
-        carrier: '',
-        type: '',
-        Language: '',
-        ad_position: [],
-        logo: [],
-        master_map:[],
-        describe: ''
+        createId: 1,
+        gameName: '',
+        carrierId: '',
+        gameType: '',
+        languageId: '',
+        advPositionIds: [],
+        advPositionIdsArray: [],
+        gameLogo: '',
+        gameImg: '',
+        gameDesc: ''
       },
       rules: {
-        name: [
+        gameName: [
           { required: true, message: '请输入游戏名称', trigger: 'blur' },
         ],
-        carrier: [
+        carrierId: [
           { required: true, message: '请选择游戏载体', trigger: 'change' }
         ],
-        type: [
+        gameType: [
           { required: true, message: '请选择游戏类型', trigger: 'change' }
         ],
-        Language: [
+        languageId: [
           { required: true, message: '请选择游戏语言', trigger: 'change' }
         ],
-        ad_position: [
+        advPositionIdsArray: [
           { type: 'array', required: true, message: '请至少选择一个广告位置', trigger: 'change' }
         ],
-        logo: [{ required: true, message: '请上传游戏LOGO', trigger: 'change' }],
-        master_map: [{ required: true, message: '请上传游戏主图', trigger: 'change' }],
-        describe: [
+        gameLogo: [{ required: true, message: '请上传游戏LOGO', trigger: 'change' }],
+        gameImg: [{ required: true, message: '请上传游戏主图', trigger: 'change' }],
+        gameDesc: [
           { required: true, message: '请填写活动描述', trigger: 'blur' }
         ]
       },
@@ -95,21 +96,52 @@ export default {
   components: {
     Upload
   },
+  created() {
+    //获取载体
+    GetCarrier().then(res => {
+      this.CarrierList = res.data
+    })
+    //获取游戏类型
+    GetGameType().then(res => {
+      this.GameTypeList = res.data
+    })
+    //获取语言
+    GetLanguage().then(res => {
+      this.LanguageList = res.data
+    })
+    //获取广告位置
+    GetADPosition().then(res => {
+      this.AdPositionIds = res.data
+      console.log( this.AdPositionIds,'999')
+    })
+  },
   methods: {
+    //提交
     submitForm(formName) {
-      console.log(formName);
+      let AdPositionIds = this.ruleForm.advPositionIdsArray.toString()
+      this.ruleForm.advPositionIds = AdPositionIds
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          alert('submit!');
+          console.log(this.ruleForm);
+          AddGame(this.ruleForm).then(res => {
+            this.Back()
+          })
         } else {
           console.log('error submit!!');
           return false;
         }
       });
     },
-    getUrl(getUrl) {
-      console.log(getUrl, '1')
-
+    //返回
+    Back() {
+      this.$router.go(-1)
+    },
+    getLogoUrl(getUrl) {
+      this.ruleForm.gameLogo = getUrl
+      this.$refs.ruleForm.validateField('fileList') // 手动触发fileList校验规则
+    },
+    getMasterUrl(getUrl) {
+      this.ruleForm.gameImg = getUrl
       this.$refs.ruleForm.validateField('fileList') // 手动触发fileList校验规则
     }
   }
@@ -120,7 +152,7 @@ export default {
   padding: 32px;
   background-color: #fff;
 
-  .title{
+  .title {
     font-size: 16px;
     color: rgba(144, 147, 153, 1);
     font-weight: 800;
@@ -144,23 +176,24 @@ export default {
     }
 
     .el-button {
-      width: 240px;
-      padding: 18px 20px;
+      width: 150px;
+      padding: 12px 20px;
       margin-top: 40px;
     }
 
-    .logo{
-      .el-upload{
+    .logo {
+      .el-upload {
         width: 100px;
         height: 100px;
         line-height: 100px;
       }
 
-      .avatar-uploader>.el-upload-list>.el-upload-list__item{
+      .avatar-uploader>.el-upload-list>.el-upload-list__item {
         width: 100px;
         height: 100px;
       }
-      .avatar-uploader>.el-upload-list>.el-upload-list__item>img{
+
+      .avatar-uploader>.el-upload-list>.el-upload-list__item>img {
         width: 100px;
         height: 100px;
       }

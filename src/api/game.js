@@ -38,3 +38,16 @@ export function GetPageByGameAdv(params) {
     data:params
   })
 }
+/**
+ *
+ * @param {*} params
+ * @returns 添加游戏
+ */
+
+export function AddGame(params) {
+  return request({
+    url: '/hou_tai/game/addGame',
+    method: 'post',
+    data:params
+  })
+}

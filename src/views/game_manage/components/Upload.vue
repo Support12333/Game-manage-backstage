@@ -82,7 +82,6 @@ export default {
         let params = new FormData();
         params.append("files", file);
         UploadImg(params).then((res) => {
-          console.log(res.data[0]);
           this.$emit("getUrl", res.data[0]);
           //这里返回的数据结构(根据自己返回结构进行修改)
           // if (res.data.status === 1) {

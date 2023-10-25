@@ -80,7 +80,7 @@ export default {
         width: '120',
         align: "center"
       }, {
-        prop: 'add_time',
+        prop: 'createTime',
         label: '添加时间',
         width: '120',
         align: "center"
