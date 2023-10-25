@@ -139,6 +139,12 @@ export const constantRoutes = [
         component: () => import('@/views/advertisement/advertising-list.vue'),
         name: '广告列表',
         meta: { title: '广告列表' }
+      },
+      {
+        path: '/add-advertising',
+        name: '添加广告',
+        component: () => import('@/views/advertisement/add-advertising.vue'),
+        hidden: true
       }
     ]
   },

@@ -12,3 +12,16 @@ export function GetAdvList(params) {
     data:params
   })
 }
+/**
+ *
+ * @param {*} params
+ * @returns 新增广告
+ */
+
+export function AddAdv(params) {
+  return request({
+    url: '/houTai/advertising/addAdv',
+    method: 'post',
+    data:params
+  })
+}

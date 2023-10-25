@@ -22,7 +22,8 @@
       </el-form-item>
       <el-form-item label="广告位置" prop="advPositionIdsArray">
         <el-checkbox-group v-model="ruleForm.advPositionIdsArray">
-          <el-checkbox v-for="(item,index) in AdPositionIds" :key="index" :label="item.id">{{ item.advPositionName}}</el-checkbox>
+          <el-checkbox v-for="(item, index) in AdPositionIds" :key="index" :label="item.id">{{
+            item.advPositionName }}</el-checkbox>
         </el-checkbox-group>
       </el-form-item>
       <el-form-item label="游戏LOGO:" prop="gameLogo" class="logo">
@@ -32,7 +33,7 @@
         <upload :limit="1" :file-list="mapImgList" @getUrl="getMasterUrl($event)" />
       </el-form-item>
       <el-form-item label="活动描述" prop="gameDesc">
-        <el-input type="textarea" resize="none" :rows="4" v-model="ruleForm.gameDesc" style="width: 400px;"></el-input>
+        <el-input type="textarea" resize="none" :rows="4" maxlength="200" v-model="ruleForm.gameDesc" placeholder="请输入" style="width: 400px;"></el-input>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="submitForm('ruleForm')">提交</el-button>
@@ -112,7 +113,6 @@ export default {
     //获取广告位置
     GetADPosition().then(res => {
       this.AdPositionIds = res.data
-      console.log( this.AdPositionIds,'999')
     })
   },
   methods: {
@@ -122,12 +122,10 @@ export default {
       this.ruleForm.advPositionIds = AdPositionIds
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          console.log(this.ruleForm);
           AddGame(this.ruleForm).then(res => {
             this.Back()
           })
         } else {
-          console.log('error submit!!');
           return false;
         }
       });

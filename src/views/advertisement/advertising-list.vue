@@ -26,16 +26,7 @@ import { GetAdvList } from '@/api/advertisement'
 export default {
   data() {
     return {
-      options: [{
-        value: '1',
-        label: '羊了个羊'
-      }, {
-        value: '2',
-        label: '忍着神'
-      }, {
-        value: '3',
-        label: '米兔环境'
-      }],
+      options: [],
       cols: [{
         prop: 'sort',
         label: '排序',

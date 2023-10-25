@@ -51,3 +51,16 @@ export function AddGame(params) {
     data:params
   })
 }
+/**
+ *
+ * @param {*} params
+ * @returns 广告状态开关
+ */
+
+export function UpdateState(params) {
+  return request({
+    url: '/hou_tai/game/adv/updateState',
+    method: 'post',
+    data:params
+  })
+}

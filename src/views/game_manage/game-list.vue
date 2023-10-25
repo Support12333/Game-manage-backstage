@@ -75,7 +75,7 @@ export default {
         width: '140',
         align: "center"
       }, {
-        prop: 'add_people',
+        prop: 'createName',
         label: '添加人',
         width: '120',
         align: "center"

@@ -48,3 +48,15 @@ export function GetADPosition() {
     method: 'get',
   })
 }
+/**
+ *
+ * @param {*} params
+ * @returns 广告数据
+ */
+
+export function GetAdvListForGame() {
+  return request({
+    url: '/houTai/advertising/getAdvListForGame',
+    method: 'post',
+  })
+}
