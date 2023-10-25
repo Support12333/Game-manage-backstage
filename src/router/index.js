@@ -130,7 +130,7 @@ export const constantRoutes = [
       },
       {
         path: 'channel-advertising',
-        component: () => import('@/views/advertisement/advertising-list.vue'),
+        component: () => import('@/views/advertisement/channel-advertising.vue'),
         name: '渠道广告分析',
         meta: { title: '渠道广告分析' }
       },

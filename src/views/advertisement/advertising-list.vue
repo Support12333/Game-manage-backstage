@@ -38,7 +38,7 @@ export default {
         width: '100',
         align: "center"
       }, {
-        prop: 'advTypeId',
+        prop: 'advTypeName',
         label: '类型',
         width: '120',
         align: "center"
@@ -58,11 +58,12 @@ export default {
         width: '140',
         align: "center"
       }, {
-        prop: 'add_time',
+        prop: 'createTime',
         label: '添加时间',
         width: '120',
         align: "center"
       }],
+      value: '',
       tableData: [],
       params: {
         page: 1,
@@ -71,14 +72,14 @@ export default {
     }
   },
   created() {
-    this.getPageByGameAdv()
+    this.getAdvList()
   },
   methods: {
     getValue(val) {
       console.log('全部游戏' + val);
     },
     addClick() {
-      this.$router.push({ path: '/add-game' })
+      this.$router.push({ path: '/add-advertising' })
     },
     getAdvList() {
       GetAdvList(this.params).then(res => {

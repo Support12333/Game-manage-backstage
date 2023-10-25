@@ -1,19 +1,19 @@
 <template>
   <div class="game">
     <el-form ref="ruleForm" :rules="rules" :model="ruleForm" label-width="200px">
-      <el-form-item label="广告名称:" prop="advTypeId" placeholder="请输入广告名称">
-        <el-input v-model="ruleForm.advTypeId" style="width: 400px;"></el-input>
+      <el-form-item label="广告名称:" prop="advName" placeholder="请输入广告名称">
+        <el-input v-model="ruleForm.advName" style="width: 400px;"></el-input>
       </el-form-item>
-      <el-form-item label="游戏类型:" prop="advName">
-        <el-radio-group v-model="ruleForm.advName" v-for="item in CarrierList" :key="item.id">
-          <el-radio :label=item.id>{{ item.carrierName }}</el-radio>
+      <el-form-item label="游戏类型:" prop="advTypeId">
+        <el-radio-group v-model="ruleForm.advTypeId" v-for="item in GameTypeList" :key="item.id">
+          <el-radio :label=item.id>{{ item.typeName }}</el-radio>
         </el-radio-group>
       </el-form-item>
-      <el-form-item label="广告封面:" prop="advImg" class="logo">
+      <el-form-item label="广告封面:" prop="advImg">
         <upload :limit="1" :file-list="advImgList" @getUrl="getadImgUrl($event)" />
       </el-form-item>
-      <el-form-item label="广告地址:" prop="gameDesc">
-        <el-input type="textarea" resize="none" :rows="4" maxlength="200" v-model="ruleForm.gameDesc" placeholder="请输入"
+      <el-form-item label="广告地址:" prop="advUrl">
+        <el-input type="textarea" resize="none" :rows="4" maxlength="200" v-model="ruleForm.advUrl" placeholder="请输入"
           style="width: 400px;"></el-input>
       </el-form-item>
       <el-form-item>
@@ -37,16 +37,16 @@ export default {
       LanguageList: [],
       AdPositionIds: [],
       ruleForm: {
-        advTypeId: '',
         advName: '',
+        advTypeId: '',
         advImg: '',
         advUrl: ''
       },
       rules: {
-        advTypeId: [
+        advName: [
           { required: true, message: '请输入广告名称', trigger: 'blur' },
         ],
-        advName: [
+        advTypeId: [
           { required: true, message: '请选择游戏类型', trigger: 'change' }
         ],
         advImg: [{ required: true, message: '请上传广告封面', trigger: 'change' }],
@@ -73,9 +73,10 @@ export default {
       console.log(this.ruleForm);
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          // AddAdv(this.ruleForm).then(res => {
-          //   this.Back()
-          // })
+          AddAdv(this.ruleForm).then(res => {
+            console.log(res);
+            this.Back()
+          })
         } else {
           return false;
         }
@@ -124,24 +125,6 @@ export default {
       width: 150px;
       padding: 12px 20px;
       margin-top: 40px;
-    }
-
-    .logo {
-      .el-upload {
-        width: 100px;
-        height: 100px;
-        line-height: 100px;
-      }
-
-      .avatar-uploader>.el-upload-list>.el-upload-list__item {
-        width: 100px;
-        height: 100px;
-      }
-
-      .avatar-uploader>.el-upload-list>.el-upload-list__item>img {
-        width: 100px;
-        height: 100px;
-      }
     }
   }
 }

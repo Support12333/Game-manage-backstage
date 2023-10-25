@@ -7,7 +7,7 @@ import request from '@/utils/request'
 
 export function GetAdvList(params) {
   return request({
-    url: '/hou_tai/advertising/getAdvList',
+    url: '/houTai/advertising/getAdvList',
     method: 'post',
     data:params
   })
