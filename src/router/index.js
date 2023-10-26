@@ -112,6 +112,12 @@ export const constantRoutes = [
         name: '详情',
         component: () => import('@/views/game_manage/feature/add-game.vue'),
         hidden: true
+      },
+      {
+        path: '/add-Implantation',
+        name: '植入广告',
+        component: () => import('@/views/game_manage/feature/add-Implantation.vue'),
+        hidden: true
       }
     ]
   },

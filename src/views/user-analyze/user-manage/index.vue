@@ -53,16 +53,7 @@ import { GetUserInfoList } from '@/api/page'
 export default {
   data() {
     return {
-      options: [{
-        value: '1',
-        label: '未点广告'
-      }, {
-        value: '2',
-        label: '点击广告'
-      }, {
-        value: '3',
-        label: '下载应用'
-      }],
+      options: [],
       tableData: [],
       date: '',
       input: '',
@@ -95,9 +86,8 @@ export default {
     },
     //时间筛选
     inquire() {
-      this.params.startTime = this.date[0]
+      this.params.startTime=this.date[0]
       this.params.endTime = this.date[1]
-      console.log(this.params);
       this.getUserInfoList()
     }
   }

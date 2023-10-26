@@ -9,6 +9,10 @@
           <el-table-column :key="index" :prop=item.prop :label="item.label" :min-width="item.width" :align="item.align" />
         </template>
       </el-table>
+      <el-pagination v-if="paginationParams.totals >= 10" @size-change="handleSizeChange" @current-change="handleCurrentChange"
+        :current-page="1" :page-sizes="[10, 20, 50, 100]" :page-size="paginationParams.pages"
+        layout="->,total, sizes, prev, pager, next, jumper" :total="paginationParams.totals">
+      </el-pagination>
     </div>
   </div>
 </template>
@@ -64,17 +68,36 @@ export default {
         align: "center"
       }],
       tableData: [],
-      params:{ page: 1, pageSize: 10,}
+      total: 1,
+      params: {
+        page: 1,
+        pageSize: 10
+      },
+      paginationParams: {
+        pages: 1,
+        totals: 1,
+        size: 1,
+      },
     }
   },
   created() {
-    GetPageByGameAnalysis(this.params).then(res => {
-      console.log(res);
-      this.tableData = res.data
-    })
+    this.getList()
   },
-  methods: {
 
+  methods: {
+    getList() {
+      GetPageByGameAnalysis(this.params).then(res => {
+        this.tableData = res.data
+      })
+    },
+    handleSizeChange(val) {
+      this.params.pageSize = val
+      this.getList()
+    },
+    handleCurrentChange(val) {
+      this.params.page = val
+      this.getList()
+    }
   },
 }
 </script>
@@ -90,6 +113,15 @@ export default {
     color: #101010;
     font-weight: bold;
     margin-bottom: 32px;
+  }
+}
+
+.table {
+  // background: #fff;
+
+  .el-pagination {
+    padding: 20px 40px;
+    background: #fff;
   }
 }
 </style>

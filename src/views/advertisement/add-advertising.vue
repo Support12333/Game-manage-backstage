@@ -37,10 +37,10 @@ export default {
       LanguageList: [],
       AdPositionIds: [],
       ruleForm: {
-        advName: '',
-        advTypeId: '',
-        advImg: '',
-        advUrl: ''
+        "advName": '',
+        "advTypeId":'',
+        "advImg":'',
+        "advUrl":''
       },
       rules: {
         advName: [
@@ -70,10 +70,12 @@ export default {
   methods: {
     //提交
     submitForm(formName) {
+      let instance = this;
       console.log(this.ruleForm);
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          AddAdv(this.ruleForm).then(res => {
+
+          AddAdv(instance.ruleForm).then(res => {
             console.log(res);
             this.Back()
           })

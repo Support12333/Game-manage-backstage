@@ -1,5 +1,5 @@
 <template>
-  <div class="table">
+  <div>
     <div class="inquire">
       <div class="title">广告列表</div>
       <el-row>
@@ -12,13 +12,25 @@
       </el-row>
     </div>
     <el-button type="primary" style="float: right;margin-bottom: 8px;" @click="addClick">添加广告</el-button>
-    <el-table :data="tableData" border style="width: 100%;" align="center" :header-cell-style="{
-      height: '56px', color: '#101010', fontSize: '16px', 'text-align': 'center'
-    }" :row-style="{ 'height': '20px', 'padding': '0' }">
-      <template v-for="(item, index) in cols">
-        <el-table-column :key="index" :prop=item.prop :label="item.label" :min-width="item.width" :align="item.align" />
-      </template>
-    </el-table>
+    <div class="table">
+      <el-table :data="tableData" border style="width: 100%;" align="center" :header-cell-style="{
+        height: '56px', color: '#101010', fontSize: '16px', 'text-align': 'center'
+      }" :row-style="{ 'height': '20px', 'padding': '0' }">
+        <el-table-column label="序号" type="index" width="100" align="center">
+          <template scope="scope">
+            <span>{{ (params.page - 1) * params.pageSize + scope.$index + 1 }}</span>
+          </template>
+        </el-table-column>
+        <template v-for="(item, index) in cols">
+          <el-table-column :key="index" :prop=item.prop :label="item.label" :min-width="item.width" :align="item.align" />
+        </template>
+      </el-table>
+      <el-pagination v-if="paginationParams.totals >= 10" @size-change="handleSizeChange"
+        @current-change="handleCurrentChange" :current-page="1" :page-sizes="[10, 20, 50, 100]"
+        :page-size="paginationParams.pages" layout="->,total, sizes, prev, pager, next, jumper"
+        :total="paginationParams.totals">
+      </el-pagination>
+    </div>
   </div>
 </template>
 <script>
@@ -28,11 +40,6 @@ export default {
     return {
       options: [],
       cols: [{
-        prop: 'sort',
-        label: '排序',
-        width: '100',
-        align: "center"
-      }, {
         prop: 'id',
         label: '广告ID',
         width: '100',
@@ -53,11 +60,6 @@ export default {
         width: '140',
         align: "center"
       }, {
-        prop: 'ad_address',
-        label: '游戏名称',
-        width: '140',
-        align: "center"
-      }, {
         prop: 'createTime',
         label: '添加时间',
         width: '120',
@@ -65,10 +67,16 @@ export default {
       }],
       value: '',
       tableData: [],
+      total: 1,
       params: {
         page: 1,
         pageSize: 10
-      }
+      },
+      paginationParams: {
+        pages: 1,
+        totals: 1,
+        size: 1,
+      },
     }
   },
   created() {
@@ -78,14 +86,29 @@ export default {
     getValue(val) {
       console.log('全部游戏' + val);
     },
+    //添加广告
     addClick() {
       this.$router.push({ path: '/add-advertising' })
     },
+    //获取列表
     getAdvList() {
       GetAdvList(this.params).then(res => {
         this.tableData = res.data
+        this.paginationParams.totals = res.total
+        this.paginationParams.size = res.size
       })
-    }
+    },
+    handleSizeChange(val) {
+      this.params.pageSize = val
+      this.getAdvList()
+    },
+    handleCurrentChange(val) {
+      console.log(`当前页: ${val}`);
+      this.params.page = val
+      this.getAdvList()
+
+    },
+
   }
 };
 </script>
@@ -100,6 +123,15 @@ export default {
     color: #101010;
     font-weight: bold;
     margin-bottom: 20px;
+  }
+}
+
+.table {
+  // background: #fff;
+
+  .el-pagination {
+    padding: 20px 40px;
+    background: #fff;
   }
 }
 </style>

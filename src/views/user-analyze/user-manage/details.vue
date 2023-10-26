@@ -11,16 +11,16 @@
           </el-col>
           <el-col :span="6" class="article">
             <div>用户id：{{ details.id }}</div>
-            <div>注册时间：{{details.signTime}}</div>
-            <div>登录方式：{{details.account}}</div>
+            <div>注册时间：{{ details.signTime }}</div>
+            <div>登录方式：{{ details.account }}</div>
           </el-col>
           <el-col :span="6" class="article">
-            <div>昵称：{{details.userName}}</div>
-            <div>最近登录时间：{{details.recentLoginTime}}</div>
-            <div>账户：{{account}}</div>
+            <div>昵称：{{ details.userName }}</div>
+            <div>最近登录时间：{{ details.recentLoginTime }}</div>
+            <div>账户：{{ account }}</div>
           </el-col>
           <el-col :span="6" class="article">
-            <div>性别：{{details.userSex}}</div>
+            <div>性别：{{ details.userSex }}</div>
           </el-col>
         </el-row>
       </div>
@@ -35,7 +35,7 @@
                 <span>{{ item }}</span>
               </template>
             </div>
-            <div>游戏时长：{{details.gameTimeAll}}</div>
+            <div>游戏时长：{{ details.gameTimeAll }}</div>
           </el-col>
           <el-col :span="6" class="article">
 
@@ -48,6 +48,7 @@
         </el-row>
       </div>
     </div>
+    <div class="btn"><el-button @click="Back">返回</el-button></div>
   </div>
 </template>
 <script>
@@ -56,7 +57,7 @@ export default {
   data() {
     return {
       details: {},
-      account:'',
+      account: '',
     }
   },
   created() {
@@ -68,13 +69,19 @@ export default {
       }
       if (res.data.phoneAccount) {
         if (this.account.length > 0) {
-          this.account = this.account+'/'+res.data.phoneAccount
+          this.account = this.account + '/' + res.data.phoneAccount
         } else {
           this.account = res.data.phoneAccount
         }
       }
     })
-  }
+  },
+  methods: {
+    //返回
+    Back() {
+      this.$router.go(-1)
+    }
+  },
 };
 </script>
 <style lang="scss" scoped>
@@ -104,9 +111,19 @@ export default {
       }
     }
 
-    span{
-        margin-right: 20px;
-      }
+    span {
+      margin-right: 20px;
+    }
+  }
+
+  .btn {
+    text-align: center;
+    margin-top: 50px;
+  }
+
+  .el-button {
+    width: 160px;
+    padding: 16px 20px;
   }
 }
 </style>

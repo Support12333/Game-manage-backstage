@@ -23,29 +23,41 @@
         </el-col>
       </el-row>
     </div>
-    <el-table :data="tableData" border style="width: 100%;margin-top: 30px;" align="center" :header-cell-style="{
-      height: '56px', color: '#101010', fontSize: '16px', 'text-align': 'center'
-    }" :row-style="{ 'height': '20px', 'padding': '0' }">
-      <el-table-column prop='advId' label="排序" min-width="110" align="center" />
-      <el-table-column prop='typeName' label="类型" min-width="110" align="center" />
-      <el-table-column prop='carrierName' label="载体" min-width="120" align="center" />
-      <el-table-column prop='languageName' label="语言" min-width="120" align="center" />
-      <el-table-column prop='gameName' label="游戏名称" min-width="140" align="center" />
-      <el-table-column prop='advName' label="广告名称" min-width="140" align="center" />
-      <el-table-column prop='advPositionName' label="广告位置" min-width="140" align="center" />
-      <el-table-column prop="states" label="游戏状态" width="140" align="center">
-        <template slot-scope="scope">
-          <el-switch v-model="scope.row.status" :active-value="1" :inactive-value="0" @change="stateChanged(scope.row)" />
-        </template>
-      </el-table-column>
-      <el-table-column prop='advStartTime' label="广告时间" min-width="140" align="center" />
+    <div class="table">
+      <el-table :data="tableData" border style="width: 100%;margin-top: 30px;" align="center" :header-cell-style="{
+        height: '56px', color: '#101010', fontSize: '16px', 'text-align': 'center'
+      }" :row-style="{ 'height': '20px', 'padding': '0' }">
+         <el-table-column label="序号" type="index" width="100" align="center">
+          <template scope="scope">
+            <span>{{ (params.page - 1) * params.pageSize + scope.$index + 1 }}</span>
+          </template>
+        </el-table-column>
+        <el-table-column prop='typeName' label="类型" min-width="110" align="center" />
+        <el-table-column prop='carrierName' label="载体" min-width="120" align="center" />
+        <el-table-column prop='languageName' label="语言" min-width="120" align="center" />
+        <el-table-column prop='gameName' label="游戏名称" min-width="140" align="center" />
+        <el-table-column prop='advName' label="广告名称" min-width="140" align="center" />
+        <el-table-column prop='advPositionName' label="广告位置" min-width="140" align="center" />
+        <el-table-column prop="states" label="游戏状态" width="140" align="center">
+          <template slot-scope="scope">
+            <el-switch v-model="scope.row.status" :active-value="1" :inactive-value="0"
+              @change="stateChanged(scope.row)" />
+          </template>
+        </el-table-column>
+        <el-table-column prop='advStartTime' label="广告时间" min-width="140" align="center" />
 
-      <el-table-column fixed="right" label="操作" min-width="140" align="center">
-        <template slot-scope="scope">
-          <el-button @click="handleClick(scope.row)" type="text" size="small">详情</el-button>
-        </template>
-      </el-table-column>
-    </el-table>
+        <!-- <el-table-column fixed="right" label="操作" min-width="140" align="center">
+          <template slot-scope="scope">
+            <el-button @click="handleClick(scope.row)" type="text" size="small">详情</el-button>
+          </template>
+        </el-table-column> -->
+      </el-table>
+      <el-pagination v-if="paginationParams.totals >= 10" @size-change="handleSizeChange" @current-change="handleCurrentChange"
+        :current-page="1" :page-sizes="[10, 20, 50, 100]" :page-size="paginationParams.pages"
+        layout="->,total, sizes, prev, pager, next, jumper" :total="paginationParams.totals">
+      </el-pagination>
+    </div>
+
   </div>
 </template>
 <script>
@@ -106,9 +118,15 @@ export default {
       }
       ],
       tableData: [],
+      total: 1,
       params: {
         page: 1,
         pageSize: 10
+      },
+      paginationParams: {
+        pages: 1,
+        totals: 1,
+        size: 1,
       },
       CarrierList: [],
       value: '',
@@ -150,7 +168,16 @@ export default {
       GetPageByGameAdv(params).then(res => {
         this.tableData = res.data
       })
-    }
+    },
+    handleSizeChange(val) {
+      this.params.pageSize = val
+      this.getPageByGameAdv(this.params)
+    },
+    handleCurrentChange(val) {
+      this.params.page = val
+      this.getPageByGameAdv(this.params)
+
+    },
   }
 };
 </script>
@@ -164,6 +191,14 @@ export default {
     color: #101010;
     font-weight: bold;
     margin-bottom: 20px;
+  }
+}
+.table {
+  // background: #fff;
+
+  .el-pagination {
+    padding: 20px 40px;
+    background: #fff;
   }
 }
 </style>
