@@ -5,13 +5,13 @@
       <el-row :gutter="20">
         <el-col :xs="12" :sm="12" :lg="3">
           <el-select v-model="channel" placeholder="全部渠道" @change="getChannelValue">
-            <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
+            <el-option v-for="item in ChannelList" :key="item.id" :label="item.channelName" :value="item.id">
             </el-option>
           </el-select>
         </el-col>
         <el-col :xs="12" :sm="12" :lg="3">
           <el-select v-model="edition" placeholder="全部版本" @change="getEditionValue">
-            <el-option v-for="item in options2" :key="item.value" :label="item.label" :value="item.value">
+            <el-option v-for="item in VersionList" :key="item.id" :label="item.channelName" :value="item.id">
             </el-option>
           </el-select>
         </el-col>
@@ -52,6 +52,7 @@
 <script>
 import echarts from 'echarts'
 import { GetAddUserDataStatistics } from '@/api/page'
+import { GetChannelList,GetVersionList } from '@/api/tool'
 export default {
   data() {
     return {
@@ -62,8 +63,8 @@ export default {
         startTime: "",
         endTime: ""
       },
-      options: [],
-      options2: [],
+      ChannelList: [],
+      VersionList: [],
       channel: '',
       edition: '',
       date: '',
@@ -73,20 +74,31 @@ export default {
     }
   },
   created() {
-
+    //获取全部渠道下拉
+    GetChannelList().then(res => {
+      this.ChannelList=res.data
+    })
+    //获取全部版本下拉
+    GetVersionList().then(res => {
+      this.VersionList=res.data
+    })
   },
   mounted() {
     this.Getdata()
 
   },
   methods: {
-
+    //渠道搜索
     getChannelValue(val) {
-      console.log('全部渠道' + val);
+      this.params.channel=val
+      this.Getdata()
     },
+    //版本搜索
     getEditionValue(val) {
-      console.log('全部版本' + val);
+      this.params.version=val
+      this.Getdata()
     },
+    //时间搜索
     inquire() {
       this.params.startTime=this.date[0]
       this.params.endTime = this.date[1]

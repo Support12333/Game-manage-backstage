@@ -60,3 +60,64 @@ export function GetAdvListForGame() {
     method: 'post',
   })
 }
+/**
+ *
+ * @param {*} params
+ * @returns 全部广告
+ */
+
+export function GetAdAll() {
+  return request({
+    url: '/app/game/getAllAdvInfoToApp',
+    method: 'get',
+  })
+}
+/**
+ *
+ * @param {*} params
+ * @returns 所有版本
+ */
+
+export function GetVersionList() {
+  return request({
+    url: '/hou_tai/game/numerical/getVersionList',
+    method: 'get',
+  })
+}
+/**
+ *
+ * @param {*} params
+ * @returns 所有属性
+ */
+
+export function GetStatsList() {
+  return request({
+    url: '/hou_tai/game/numerical/getStatsList',
+    method: 'get',
+  })
+}
+/**
+ *
+ * @param {*} params
+ * @returns 所有渠道
+ */
+
+export function GetChannelList() {
+  return request({
+    url: '/hou_tai/game/numerical/getChannelList',
+    method: 'get',
+  })
+}
+/**
+ *
+ * @param {*} params
+ * @returns 全部游戏
+ */
+
+export function GetlistByGame(params) {
+  return request({
+    url: '/hou_tai/game/listByGame',
+    method: 'post',
+    data:params
+  })
+}

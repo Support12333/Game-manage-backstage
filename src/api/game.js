@@ -54,6 +54,19 @@ export function AddGame(params) {
 /**
  *
  * @param {*} params
+ * @returns 植入广告
+ */
+
+export function GameAdv(params) {
+  return request({
+    url: '/hou_tai/game/adv/addGameAdv',
+    method: 'post',
+    data:params
+  })
+}
+/**
+ *
+ * @param {*} params
  * @returns 广告状态开关
  */
 

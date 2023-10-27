@@ -5,13 +5,19 @@
       <el-table :data="tableData" border style="width: 100%;" align="center" :header-cell-style="{
         height: '56px', color: '#101010', fontSize: '16px', 'text-align': 'center'
       }" :row-style="{ 'height': '20px', 'padding': '0' }">
+        <el-table-column label="排名" type="index" width="100" align="center">
+          <template scope="scope">
+            <span>{{ (params.page - 1) * params.pageSize + scope.$index + 1 }}</span>
+          </template>
+        </el-table-column>
         <template v-for="(item, index) in cols">
           <el-table-column :key="index" :prop=item.prop :label="item.label" :min-width="item.width" :align="item.align" />
         </template>
       </el-table>
-      <el-pagination v-if="paginationParams.totals >= 10" @size-change="handleSizeChange" @current-change="handleCurrentChange"
-        :current-page="1" :page-sizes="[10, 20, 50, 100]" :page-size="paginationParams.pages"
-        layout="->,total, sizes, prev, pager, next, jumper" :total="paginationParams.totals">
+      <el-pagination v-if="paginationParams.totals >= 10" @size-change="handleSizeChange"
+        @current-change="handleCurrentChange" :current-page="1" :page-sizes="[10, 20, 50, 100]"
+        :page-size="paginationParams.pages" layout="->,total, sizes, prev, pager, next, jumper"
+        :total="paginationParams.totals">
       </el-pagination>
     </div>
   </div>
@@ -22,11 +28,6 @@ export default {
   data() {
     return {
       cols: [{
-        prop: 'rank',
-        label: '排名',
-        width: '100',
-        align: "center"
-      }, {
         prop: 'typeName',
         label: '类型',
         width: '120',

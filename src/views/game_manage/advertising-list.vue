@@ -5,7 +5,7 @@
       <el-row :gutter="20">
         <el-col :xs="12" :sm="12" :lg="3">
           <el-select v-model="value" placeholder="全部广告" @change="getAdValue">
-            <el-option v-for="item in advertisement" :key="item.value" :label="item.label" :value="item.value">
+            <el-option v-for="item in AdValue" :key="item.advId" :label="item.advName" :value="item.advId">
             </el-option>
           </el-select>
         </el-col>
@@ -17,7 +17,7 @@
         </el-col>
         <el-col :xs="12" :sm="12" :lg="3">
           <el-select v-model="value3" placeholder="全部游戏" @change="getGameValue">
-            <el-option v-for="item in game" :key="item.value" :label="item.label" :value="item.value">
+            <el-option v-for="item in gameList" :key="item.id" :label="item.gameName" :value="item.id">
             </el-option>
           </el-select>
         </el-col>
@@ -62,13 +62,13 @@
 </template>
 <script>
 import { GetPageByGameAdv, UpdateState } from '@/api/game'
-import { GetCarrier } from '@/api/tool'
+import { GetAdAll,GetCarrier,GetlistByGame } from '@/api/tool'
 export default {
   data() {
     return {
-      advertisement: [],
+      AdValue: [],
       carrier: [],
-      game: [],
+      gameList: [],
       cols: [{
         prop: 'advId',
         label: '排序',
@@ -120,6 +120,9 @@ export default {
       tableData: [],
       total: 1,
       params: {
+        advId:0,
+        carrierId: 0,
+        gameId:0,
         page: 1,
         pageSize: 10
       },
@@ -129,34 +132,43 @@ export default {
         size: 1,
       },
       CarrierList: [],
+      data: {},
       value: '',
       value2: '',
       value3: ''
     }
   },
   created() {
+    //获取广告
+    GetAdAll().then(res => {
+      this.AdValue = res.data
+    })
     //获取载体
     GetCarrier().then(res => {
       this.CarrierList = res.data
+    })
+    //获取全部游戏
+    GetlistByGame(this.data).then(res => {
+      this.gameList = res.data
     })
     this.getPageByGameAdv(this.params)
   },
   methods: {
     //广告搜索
     getAdValue(val) {
-      console.log('全部游戏' + val);
+      this.params.advId=val
+      console.log(this.params);
+      this.getPageByGameAdv();
     },
     //载体搜索
     getCarrierValue(val) {
-      this.getPageByGameAdv({
-        carrierId: val,
-        page: 1,
-        pageSize: 10
-      });
+      this.params.carrierId=val
+      this.getPageByGameAdv();
     },
     //游戏搜索
     getGameValue(val) {
-      console.log('全部游戏' + val);
+      this.params.gameId = val
+      this.getPageByGameAdv()
     },
     //状态开关
     stateChanged(row) {

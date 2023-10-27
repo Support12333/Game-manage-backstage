@@ -151,6 +151,12 @@ export const constantRoutes = [
         name: '添加广告',
         component: () => import('@/views/advertisement/add-advertising.vue'),
         hidden: true
+      },
+      {
+        path: '/gameadv-details',
+        name: '游戏广告详情',
+        component: () => import('@/views/advertisement/gameadv-details.vue'),
+        hidden: true
       }
     ]
   },

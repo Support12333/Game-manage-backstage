@@ -50,6 +50,7 @@
 
 <script>
 import { GetUserInfoList } from '@/api/page'
+import { GetStatsList } from '@/api/tool'
 export default {
   data() {
     return {
@@ -70,6 +71,10 @@ export default {
   },
   created() {
     this.getUserInfoList()
+    //获取属性下拉
+    GetStatsList().then(res => {
+      this.options = res.data
+    })
   },
   methods: {
     //获取列表数据
@@ -79,17 +84,19 @@ export default {
       })
     },
     getstatsIdValue(val) {
-      console.log('全部渠道' + val);
+      //属性搜索
+      this.params.statsId = val
+      this.getUserInfoList()
+    },
+    //时间筛选
+    inquire() {
+      this.params.startTime = this.date[0]
+      this.params.endTime = this.date[1]
+      this.getUserInfoList()
     },
     handleClick(id) {
       this.$router.push({ path: '/details', query: { id: id } })
     },
-    //时间筛选
-    inquire() {
-      this.params.startTime=this.date[0]
-      this.params.endTime = this.date[1]
-      this.getUserInfoList()
-    }
   }
 }
 </script>

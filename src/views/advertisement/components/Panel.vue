@@ -24,7 +24,7 @@ export default {
       default: false
     },
     totality: {
-      type: String,
+      type: Number,
       default: false
     },
     today_text: {
@@ -32,7 +32,7 @@ export default {
       default: false
     },
     today: {
-      type: String,
+      type: Number,
       default: false
     },
     yesterday_text: {
@@ -40,7 +40,7 @@ export default {
       default: false
     },
     yesterday: {
-      type: String,
+      type: Number,
       default: false
     },
     colors: {
