@@ -68,8 +68,8 @@ export function GetAdvListForGame() {
 
 export function GetAdAll() {
   return request({
-    url: '/app/game/getAllAdvInfoToApp',
-    method: 'get',
+    url: '/houTai/advertising/getAdvListForGame',
+    method: 'post',
   })
 }
 /**

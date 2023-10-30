@@ -108,11 +108,7 @@ export default {
   background-color: #fff;
 
   .el-form {
-    .input {
-      input {
-        border: 0 !important;
-      }
-    }
+
 
     .el-form-item {
       margin-bottom: 20px;

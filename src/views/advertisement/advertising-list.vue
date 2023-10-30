@@ -4,8 +4,8 @@
       <div class="title">广告列表</div>
       <el-row>
         <el-col :xs="12" :sm="12" :lg="3">
-          <el-select v-model="value" placeholder="全部游戏" @change="getValue">
-            <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
+          <el-select v-model="value" placeholder="全部广告" @change="getAdValue">
+            <el-option v-for="item in AdValue" :key="item.id" :label="item.advName" :value="item.id">
             </el-option>
           </el-select>
         </el-col>
@@ -35,10 +35,11 @@
 </template>
 <script>
 import { GetAdvList } from '@/api/advertisement'
+import { GetAdAll} from '@/api/tool'
 export default {
   data() {
     return {
-      options: [],
+      AdValue: [],
       cols: [{
         prop: 'id',
         label: '广告ID',
@@ -69,6 +70,7 @@ export default {
       tableData: [],
       total: 1,
       params: {
+        advId: 0,
         page: 1,
         pageSize: 10
       },
@@ -80,11 +82,17 @@ export default {
     }
   },
   created() {
+    //获取广告
+    GetAdAll().then(res => {
+      this.AdValue = res.data
+    })
     this.getAdvList()
   },
   methods: {
-    getValue(val) {
-      console.log('全部游戏' + val);
+     //广告搜索
+     getAdValue(val) {
+      this.params.advId = val
+      this.getAdvList();
     },
     //添加广告
     addClick() {

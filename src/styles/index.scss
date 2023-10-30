@@ -63,3 +63,9 @@ div:focus {
 .app-container {
   padding: 20px;
 }
+
+.input {
+  .el-input__inner {
+    border: 0 !important;
+  }
+}

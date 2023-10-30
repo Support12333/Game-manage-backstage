@@ -8,7 +8,7 @@
         </el-col>
         <el-col :xs="12" :sm="12" :lg="3">
           <el-select v-model="value" placeholder="属性" @change="getstatsIdValue">
-            <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
+            <el-option v-for="item in options" :key="item.id" :label="item.statsName" :value="item.id">
             </el-option>
           </el-select>
         </el-col>

@@ -5,7 +5,7 @@
       <el-row :gutter="20">
         <el-col :xs="12" :sm="12" :lg="3">
           <el-select v-model="value" placeholder="全部广告" @change="getAdValue">
-            <el-option v-for="item in AdValue" :key="item.advId" :label="item.advName" :value="item.advId">
+            <el-option v-for="item in AdValue" :key="item.id" :label="item.advName" :value="item.id">
             </el-option>
           </el-select>
         </el-col>
@@ -27,7 +27,7 @@
       <el-table :data="tableData" border style="width: 100%;margin-top: 30px;" align="center" :header-cell-style="{
         height: '56px', color: '#101010', fontSize: '16px', 'text-align': 'center'
       }" :row-style="{ 'height': '20px', 'padding': '0' }">
-         <el-table-column label="序号" type="index" width="100" align="center">
+        <el-table-column label="序号" type="index" width="100" align="center">
           <template scope="scope">
             <span>{{ (params.page - 1) * params.pageSize + scope.$index + 1 }}</span>
           </template>
@@ -52,9 +52,10 @@
           </template>
         </el-table-column> -->
       </el-table>
-      <el-pagination v-if="paginationParams.totals >= 10" @size-change="handleSizeChange" @current-change="handleCurrentChange"
-        :current-page="1" :page-sizes="[10, 20, 50, 100]" :page-size="paginationParams.pages"
-        layout="->,total, sizes, prev, pager, next, jumper" :total="paginationParams.totals">
+      <el-pagination v-if="paginationParams.totals >= 10" @size-change="handleSizeChange"
+        @current-change="handleCurrentChange" :current-page="1" :page-sizes="[10, 20, 50, 100]"
+        :page-size="paginationParams.pages" layout="->,total, sizes, prev, pager, next, jumper"
+        :total="paginationParams.totals">
       </el-pagination>
     </div>
 
@@ -62,7 +63,7 @@
 </template>
 <script>
 import { GetPageByGameAdv, UpdateState } from '@/api/game'
-import { GetAdAll,GetCarrier,GetlistByGame } from '@/api/tool'
+import { GetAdAll, GetCarrier, GetlistByGame } from '@/api/tool'
 export default {
   data() {
     return {
@@ -120,9 +121,9 @@ export default {
       tableData: [],
       total: 1,
       params: {
-        advId:0,
+        advId: 0,
         carrierId: 0,
-        gameId:0,
+        gameId: 0,
         page: 1,
         pageSize: 10
       },
@@ -156,13 +157,13 @@ export default {
   methods: {
     //广告搜索
     getAdValue(val) {
-      this.params.advId=val
-      console.log(this.params);
+      this.params.advId = val
       this.getPageByGameAdv();
+      console.log(this.params);
     },
     //载体搜索
     getCarrierValue(val) {
-      this.params.carrierId=val
+      this.params.carrierId = val
       this.getPageByGameAdv();
     },
     //游戏搜索
@@ -205,6 +206,7 @@ export default {
     margin-bottom: 20px;
   }
 }
+
 .table {
   // background: #fff;
 
