@@ -66,10 +66,8 @@ export default {
     }
   },
   created() {
-    console.log(this.$route.query,'6666');
     this.gameData = this.$route.query
     this.ruleForm.gameId = JSON.parse(this.gameData.id)
-    console.log(this.gameData);
     //广告位置
     GetADPosition().then(res => {
       this.advPosition = res.data

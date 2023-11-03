@@ -54,7 +54,7 @@ export default {
         align: "center"
       }, {
         prop: 'gameShareNum',
-        label: '游戏分析（次）',
+        label: '游戏分享（次）',
         width: '120',
         align: "center"
       }, {

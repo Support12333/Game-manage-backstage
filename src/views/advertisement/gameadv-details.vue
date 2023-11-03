@@ -1,18 +1,21 @@
 <template>
-  <div class="details">
-    <div class="title">广告详情</div>
-    <el-table :data="tableData" border style="width: 100%;" align="center" :header-cell-style="{
-      height: '56px', color: '#101010', fontSize: '16px', 'text-align': 'center'
-    }" :row-style="{ 'height': '20px', 'padding': '0' }">
-      <template v-for="(item, index) in cols">
-        <el-table-column :key="index" :prop=item.prop :label="item.label" :min-width="item.width" :align="item.align" />
-      </template>
-    </el-table>
-    <el-pagination v-if="paginationParams.totals >= 10" @size-change="handleSizeChange"
-      @current-change="handleCurrentChange" :current-page="1" :page-sizes="[10, 20, 50, 100]"
-      :page-size="paginationParams.pages" layout="->,total, sizes, prev, pager, next, jumper"
-      :total="paginationParams.totals">
-    </el-pagination>
+  <div>
+    <div class="details">
+      <div class="title">广告详情</div>
+      <el-table :data="tableData" border style="width: 100%;" align="center" :header-cell-style="{
+        height: '56px', color: '#101010', fontSize: '16px', 'text-align': 'center'
+      }" :row-style="{ 'height': '20px', 'padding': '0' }">
+        <template v-for="(item, index) in cols">
+          <el-table-column :key="index" :prop=item.prop :label="item.label" :min-width="item.width" :align="item.align" />
+        </template>
+      </el-table>
+      <el-pagination v-if="paginationParams.totals >= 10" @size-change="handleSizeChange"
+        @current-change="handleCurrentChange" :current-page="1" :page-sizes="[10, 20, 50, 100]"
+        :page-size="paginationParams.pages" layout="->,total, sizes, prev, pager, next, jumper"
+        :total="paginationParams.totals">
+      </el-pagination>
+    </div>
+    <div class="btn"><el-button @click="Back">返回</el-button></div>
   </div>
 </template>
 <script>
@@ -92,6 +95,9 @@ export default {
     handleCurrentChange(val) {
       this.params.page = val
       this.getAdvDetailList()
+    },
+    Back() {
+      this.$router.go(-1)
     }
   },
 };
@@ -114,5 +120,15 @@ export default {
 .el-pagination {
   padding: 20px 40px;
   background: #fff;
+}
+
+.btn {
+  text-align: center;
+  margin-top: 50px;
+
+  .el-button {
+    width: 160px;
+    padding: 16px 20px;
+  }
 }
 </style>

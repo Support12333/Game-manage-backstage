@@ -136,11 +136,11 @@ export default {
     },
     getLogoUrl(getUrl) {
       this.ruleForm.gameLogo = getUrl
-      this.$refs.ruleForm.validateField('fileList') // 手动触发fileList校验规则
+      this.$refs.ruleForm.validateField('fileList')
     },
     getMasterUrl(getUrl) {
       this.ruleForm.gameImg = getUrl
-      this.$refs.ruleForm.validateField('fileList') // 手动触发fileList校验规则
+      this.$refs.ruleForm.validateField('fileList')
     }
   }
 }

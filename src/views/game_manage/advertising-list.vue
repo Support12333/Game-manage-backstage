@@ -152,7 +152,7 @@ export default {
     GetlistByGame(this.data).then(res => {
       this.gameList = res.data
     })
-    this.getPageByGameAdv(this.params)
+    this.getPageByGameAdv()
   },
   methods: {
     //广告搜索
@@ -177,18 +177,20 @@ export default {
       })
     },
     //列表
-    getPageByGameAdv(params) {
-      GetPageByGameAdv(params).then(res => {
-        this.tableData = res.data
+    getPageByGameAdv() {
+      GetPageByGameAdv(this.params).then(res => {
+        this.tableData = res.data,
+        this.paginationParams.totals = res.total
+        this.paginationParams.size = res.size
       })
     },
     handleSizeChange(val) {
       this.params.pageSize = val
-      this.getPageByGameAdv(this.params)
+      this.getPageByGameAdv()
     },
     handleCurrentChange(val) {
       this.params.page = val
-      this.getPageByGameAdv(this.params)
+      this.getPageByGameAdv()
 
     },
   }

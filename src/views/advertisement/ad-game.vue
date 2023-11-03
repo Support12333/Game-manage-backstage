@@ -172,7 +172,6 @@ export default {
       this.getAdvList()
     },
     handleCurrentChange(val) {
-      console.log(`当前页: ${val}`);
       this.params.page = val
       this.getAdvList()
 

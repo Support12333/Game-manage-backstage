@@ -3,14 +3,14 @@ module.exports = {
   title: 'Vue Admin Template',
 
   /**
-   * @type {boolean} true | false
-   * @description Whether fix the header
+   * @type {boolean}
+   * @description
    */
   fixedHeader: false,
 
   /**
-   * @type {boolean} true | false
-   * @description Whether show the logo in sidebar
+   * @type {boolean}
+   * @description
    */
   sidebarLogo: true
 }
